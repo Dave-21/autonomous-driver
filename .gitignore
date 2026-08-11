@@ -1,0 +1,8 @@
+# Ignore raw scraped JSON dumps and temporary commit files
+data/raw/
+.commit_msg.tmp
+
+# Ignore Python and Pytest caches
+__pycache__/
+.pytest_cache/
+*.pyc
