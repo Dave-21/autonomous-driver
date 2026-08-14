@@ -1,0 +1,8 @@
+- et the entire system up and running.
+- make sure that it has strict guardrails, only having access to everything inside of "C:\Users\david\code\autonomous\autonomous-driver". But it has the have all the necessary permissions for everything inside of "C:\Users\david\code\autonomous\autonomous-driver".
+- make sure that it exits gracefully if I ever manually stop it or my PC randomly shuts down.
+-  integrate a GasBuddy scraper into it alongside a Live Lincoln Road Station scraper.
+-  self-refactoring code loop.
+- take advantage of historical data too, as many factors as possible.
+- We need it to predict gas price of tomorrow and give the user insights on when to fill up on gas.
+- When testing it, it also needs to back-test on historical data to see what the current accuracy is.
