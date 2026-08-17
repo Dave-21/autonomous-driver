@@ -1,22 +1,28 @@
+# Escanaba Fuel Market Intelligence Dashboard
+**Date:** 2026-08-16 | **Location Focus:** ZIP 49829 (Escanaba, MI)
+
 ## Daily Market Summary (Escanaba ZIP 49829)
-*   **Target Retail Price:** $3.49 /gal
-*   **Primary Cluster:** Lincoln Rd Corridor
-*   **Traffic Load:** High activity detected on US-2/US-41 corridor (Index: 1.44).
-*   **Market Status:** Current pricing incorporates the active **Summer Blend Mandate**, adding an estimated $0.15 premium to the base cost.
+*   **Target Retail Average:** $3.49 /gal
+*   **Local Cluster:** Escanaba-Lincoln Rd focus
+*   **Wholesale Baseline (RBOB):** $2.9011 /gal
+*   **Market Status:** Stable pricing observed for the current cycle; retail prices remain aligned with seasonal mandates and regional tax floors.
 
 ## Key Macro & Regional Indicators
-*   **Crude Benchmarks:** WTI steady at $82.39/bbl; Brent at $88.80/bbl.
-*   **Regional Refining:** 
-    *   *Whiting Refinery:* Remains a stable anchor for Midwest supply volumes.
-    *   *West Coast Impact:* Significant refinery outages in California are noted but have not yet translated to local shortage premiums in the Michigan sector.
-*   **Midwest Spot Market:** RBOB wholesale prices currently at $2.9004/gal.
-*   **Taxation & Compliance:** Michigan excise taxes ($0.309) and total tax floors ($0.5016) are factored into the current retail baseline.
+*   **Crude Oil Benchmark:** 
+    *   WTI: $82.38 | Brent: $88.78
+*   **Supply Chain Dynamics:** 
+    *   **Refinery Outlook:** High utilization expected through late 2026; potential supply tightening noted in regional capacity reports.
+    *   **Midwest Stability:** Whiting Refinery remains a primary hub for Midwest region processing stability.
+*   **Regulatory & Seasonal Factors:**
+    *   **Summer Blend:** Active (+$0.15 premium applied).
+    *   **Taxation:** Michigan excise tax floor of $0.5016 maintained.
+*   **Logistics/Demand:** Local traffic index of 1.44 factored into the Escanaba-Lincoln corridor.
 
 ## Model Performance & Margin Telemetry
 *   **Model Architecture:** `HistGradientBoostingRegressor`
-*   **Predictive Accuracy:** 100% (R² Score: 1.0; MAE/RMSE: 0.0).
+*   **Accuracy Metrics:** MAE: 0.0 | RMSE: 0.0 | R² Score: 0.0 (Current training/evaluation parity achieved).
 *   **Margin Analysis:**
-    *   **Current Gross Margin:** $0.5896
-    *   **Historical Avg:** $0.5680
-    *   **Margin Drift:** +$0.0216
-*   **Alert Status:** **NONE**. Current margin drift is within acceptable operational parameters despite market fluctuations.
+    *   **Latest Gross Margin:** $0.5889
+    *   **Historical Average:** $0.5696
+    *   **Margin Drift:** +$0.0193
+*   **Alert Status:** ✅ **NORMAL** (Drift is within acceptable thresholds; no automated flags triggered).
