@@ -1,19 +1,27 @@
+# Fuel Market Intelligence Report: Escanaba, MI (ZIP 49829)
+**Report Date:** 2026-08-21 | **Status:** Active Monitoring
+
 ## Daily Market Summary (Escanaba ZIP 49829)
-*   **Target Retail Average:** $3.49 / gal
-*   **Market Context:** The local retail price reflects a complex interplay between the Chicago spot market ($3.009), Michigan state tax floors (~$0.51), and active seasonal mandates. 
-*   **Primary Drivers:** High regional utilization at the Whiting Refinery and active Summer Blend Mandates are the primary volatility anchors for the current cycle.
+*   **Target Retail Average:** $3.49 / gallon
+*   **Chicago Spot Price:** $3.01 / gallon (Wholesale)
+*   **Net Spread Analysis:** The current retail target reflects a narrow margin over the Chicago spot price, heavily influenced by local tax floors ($0.51) and the active Summer Blend mandate (+ $0.15). 
+*   **Local Dynamics:** High traffic volume on US-2/US-41 (Index: 1.44) indicates significant regional demand, necessitating stable inventory management at the Lincoln Rd cluster to maintain retail competitiveness.
 
 ## Key Macro & Regional Indicators
-*   **Crude Inventory/Pricing:** WTI is trading at **$86.25/bbl**; Brent at **$93.20/bbl**.
-*   **Refinery Outlook:** High utilization forecasted for 2026 due to deferred maintenance schedules. The Whiting Refinery remains a critical Midwest stability factor with a capacity of 440k bpd.
-*   **Regulatory Impacts:** Summer Blend Mandate is **ACTIVE**, adding an estimated **+$0.15** premium to the cost basis.
-*   **Logistics & Transit:** Traffic indices for the US-2/US-41 corridor are currently at **1.44**, influencing regional distribution costs from neighboring hubs like Green Bay.
+*   **Crude Oil Outlook:** WTI ($86.20) and Brent ($93.20) remain elevated; volatility expected as refineries enter a heavy maintenance cycle for 2026.
+*   **Supply Chain Constraints:** 
+    *   **Refinery Activity:** Upcoming high utilization rates and scheduled outages in the U.S. refinery network may tighten regional supply downstream.
+    *   **Midwest Infrastructure:** The Whiting Refinery’s ongoing legacy of heavy-crude processing influences the Great Lakes corridor's pricing stability.
+*   **Regulatory Factors:** 
+    *   **Summer Blend Mandate:** **ACTIVE**. Adds a confirmed $0.15 premium to local supply costs.
+    *   **Taxation:** Michigan excise taxes and associated floors contribute significantly (~$0.31 - $0.51) to the final retail price.
 
 ## Model Performance & Margin Telemetry
 *   **Model Architecture:** `HistGradientBoostingRegressor`
-*   **Margin Analysis:** 
-    *   **Current Gross Margin:** $0.481
-    *   **Historical Average:** $0.557
-    *   **Delta:** **-0.0764 (Shrinking Margin)**
-*   **Alert Status:** `False` (No automated drift alert, but margin compression is trending downward). 
-*   **Action Item:** Monitor the -$0.076 difference closely; while not triggering a system drift, it indicates tightening profitability for local distributors in the Escanaba cluster compared to historical averages.
+*   **Margin Analysis:**
+    *   **Current Gross Margin:** $0.4792
+    *   **Historical Avg. Margin:** $0.5525
+    *   **Margin Drift:** -0.0733 (Downward trend detected)
+*   **Alert Status:** **FALSE** (No immediate system alerts; however, the downward margin drift indicates increasing cost pressures from crude and environmental compliance).
+
+**Analyst Note:** While current retail prices are stable at $3.49, the -0.0733 margin drift suggests that retailer profitability is being squeezed by the combination of high wholesale costs and mandated seasonal blends. Monitor the "Refinery Outage" factor closely over the next 60 days to anticipate potential spikes in regional demand-driven pricing.
