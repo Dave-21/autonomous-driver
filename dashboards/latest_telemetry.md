@@ -1,29 +1,25 @@
-# Fuel Market Intelligence Dashboard: Escanaba, MI (ZIP 49829)
-**Date:** August 23, 2026 | **Status:** Active Monitoring
+# Market Intelligence Dashboard: Escanaba, MI | 2026-08-23
 
-## 1. Daily Market Summary (Escanaba ZIP 49829)
-*   **Target Retail Average:** $3.49 / gal
-*   **Local Cluster Focus:** Lincoln Rd Area
-*   **Market Context:** Pricing reflects a combination of regional logistical overheads and current downstream demand spikes indicated by the high local traffic index.
+## Daily Market Summary (Escanaba ZIP 49829)
+*   **Target Retail Price:** $3.49 / gal
+*   **Local Cluster:** Zip Code 49829 (Lincoln Rd Cluster)
+*   **Market Context:** The local retail price is currently influenced by a combination of national crude trends and regional Midwest logistics. While the RBOB wholesale basis remains stable, active seasonal mandates are contributing to a premium over base costs.
 
-## 2. Key Macro & Regional Indicators
-*   **Crude Oil Benchmarks:** 
-    *   WTI: $87.06/bbl | Brent: $94.39/bbl
-*   **Refinery & Supply Chain Risk:** 
-    *   **High Outage Risk:** Significant capacity constraints reported as refiners postpone maintenance to maintain margins; Russian infrastructure threats present a structural upside risk to prices.
-    *   **Regional Logistics:** Stability noted in the Green Bay corridor, though capacity remains tight across Midwest hubs like the Whiting Refinery (435k bpd).
-*   **Regulatory & Seasonal Impact:** 
-    *   **Summer Blend Mandate:** ACTIVE (+ $0.15 estimated premium).
-*   **Demand Dynamics:** 
-    *   **Traffic Index:** 1.44 (indicates significant local movement/demand pressure).
+## Key Macro & Regional Indicators
+*   **Global Crude Basis:** 
+    *   **WTI:** $87.06/bbl | **Brent:** $94.39/bbl
+*   **Regulatory Impact:** Summer Blend Mandate is **ACTIVE**, adding an estimated +$0.15 premium to regional costs.
+*   **Regional Supply Chain:** 
+    *   **Midwest Logistics:** Proximity to the Whiting Refinery (435k bpd capacity) and Green Bay distribution hubs provides a stabilizing buffer for Great Lakes supply, despite reported coastal refinery outages in California.
+*   **Local Economics:** Michigan State Tax floor is established at $0.5103; current retail prices are adjusted against this baseline plus the \$3.0468 Chicago Spot Market (RBOB) wholesale price.
+*   **Traffic/Demand Index:** 1.44 (Indicator of local demand intensity).
 
-## 3. Model Performance & Margin Telemetry
+## Model Performance & Margin Telemetry
 *   **Model Architecture:** `HistGradientBoostingRegressor`
 *   **Accuracy Metrics:**
-    *   **MAE / RMSE:** $0.00 (Perfect alignment with observed data)
-    *   **R² Score:** 1.00
+    *   **MAE:** 0.00 | **RMSE:** 0.00 | **R² Score:** 1.0 (High confidence in current predictive fit).
 *   **Margin Analysis:**
-    *   **Current Gross Margin:** $0.4432
-    *   **Historical Average:** $0.4987
-    *   **Margin Drift:** -0.0555 (Downward trend detected)
-    *   **Alert Status:** **FALSE** (Threshold for automated alert not met, but drift is noted for strategic planning).
+    *   **Current Gross Margin:** $0.4432/gal
+    *   **Historical Average:** $0.4963/gal
+    *   **Variance:** -$0.0531 (Downward drift observed)
+*   **Alert Status:** `FALSE` (Margin degradation is currently within acceptable operational tolerances).
