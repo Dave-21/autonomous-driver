@@ -25,12 +25,15 @@ def transform_raw_to_features(raw_data: dict) -> dict:
     brent = macro.get("brent_usd_bbl", 0.0)
     rbob = spot.get("rbob_wholesale_usd_gal", 0.0)
     tax_floor = taxes.get("est_total_tax_floor_usd", 0.309)
-    retail_price = local.get("target_retail_avg", 0.0)
+    
+    # Extract live scraped retail target and cluster price spread
+    retail_price = float(local.get("target_retail_avg", 4.12))
+    local_spread = float(local.get("local_price_spread_usd", 0.0))
 
     # Derived Economic Spreads & Margins
     gross_rack_to_retail_margin = round(retail_price - rbob, 4) if rbob > 0 else 0.0
     net_margin_after_tax = round(gross_rack_to_retail_margin - tax_floor, 4)
-    crude_to_rbob_crack_spread = round(rbob - (wti / 42.0), 4) if wti > 0 else 0.0  # 42 gallons per barrel
+    crude_to_rbob_crack_spread = round(rbob - (wti / 42.0), 4) if wti > 0 else 0.0
 
     # Text Risk Features from Factors 2, 4, and 7
     nat_outage_risk = extract_news_alert_score(raw_data.get("factor_2_national_refinery_outages", ""))
@@ -48,6 +51,7 @@ def transform_raw_to_features(raw_data: dict) -> dict:
         "crude_to_rbob_crack_spread": crude_to_rbob_crack_spread,
         "gross_rack_to_retail_margin": gross_rack_to_retail_margin,
         "net_margin_after_tax": net_margin_after_tax,
+        "local_price_spread_usd": local_spread,
         "whiting_refinery_outage_risk": whiting_outage_risk,
         "national_refinery_outage_risk": nat_outage_risk,
         "green_bay_terminal_risk": terminal_risk,
@@ -69,6 +73,7 @@ def update_feature_matrix():
     os.makedirs("data", exist_ok=True)
     if os.path.exists(FEATURE_STORE_CSV):
         df_existing = pd.read_csv(FEATURE_STORE_CSV)
+        # Avoid duplicate row insertion for identical timestamps
         df_combined = pd.concat([df_existing, df_new], ignore_index=True).drop_duplicates(subset=["timestamp"])
     else:
         df_combined = df_new

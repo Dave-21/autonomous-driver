@@ -1,8 +1,16 @@
 import json
 import os
+import sys
 from datetime import datetime
 import yfinance as yf
 from ddgs import DDGS
+
+# Ensure python can locate scrape_escanaba whether executed from root or src/ingest
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+try:
+    from src.ingest.scrape_escanaba import scrape_escanaba_cluster
+except ImportError:
+    from scrape_escanaba import scrape_escanaba_cluster
 
 def fetch_9_factor_payload():
     today = datetime.now()
@@ -55,9 +63,7 @@ def fetch_9_factor_payload():
     # -------------------------------------------------------------
     print("[6/9] Calculating Michigan State Tax Floor...")
     excise_tax = 0.309  # Base MI excise tax
-    # Sales tax of 6% applies to combined wholesale + excise baseline
-    est_wholesale = rbob
-    sales_tax_est = (est_wholesale + excise_tax) * 0.06
+    sales_tax_est = (rbob + excise_tax) * 0.06
     total_tax_floor = round(excise_tax + sales_tax_est, 4)
 
     # -------------------------------------------------------------
@@ -77,18 +83,17 @@ def fetch_9_factor_payload():
     # Factor 8: US-2 / US-41 Freight Traffic Index
     # -------------------------------------------------------------
     print("[8/9] Computing US-2 / US-41 Local Highway Traffic Index...")
-    # Weekend (5, 6) and Friday (4) experience higher corridor transit volume
     day_of_week = today.weekday()
     traffic_multiplier = 1.25 if day_of_week in [4, 5, 6] else 1.0
-    if today.month in [6, 7, 8]:  # Tourism / Summer travel season
+    if today.month in [6, 7, 8]:  # Summer travel seasonality
         traffic_multiplier *= 1.15
     traffic_index = round(traffic_multiplier, 2)
 
     # -------------------------------------------------------------
-    # Factor 9: Lincoln Road Stations Cluster (Escanaba ZIP 49829)
+    # Factor 9: Live Escanaba Station Scraper (py-gasbuddy)
     # -------------------------------------------------------------
-    print("[9/9] Ingesting Escanaba Lincoln Rd Station Prices (ZIP 49829)...")
-    escanaba_target_retail = 3.49  # Injected from local station tracker
+    print("[9/9] Ingesting Live Escanaba Lincoln Rd Station Prices (ZIP 49829)...")
+    local_cluster_data = scrape_escanaba_cluster()
 
     # -------------------------------------------------------------
     # Construct Full 9-Factor Payload
@@ -114,10 +119,7 @@ def fetch_9_factor_payload():
         },
         "factor_7_green_bay_terminals": "\n".join(green_bay_news),
         "factor_8_us2_us41_traffic_index": traffic_index,
-        "factor_9_escanaba_lincoln_rd_cluster": {
-            "zip_code": "49829",
-            "target_retail_avg": escanaba_target_retail
-        }
+        "factor_9_escanaba_lincoln_rd_cluster": local_cluster_data
     }
 
     os.makedirs("data/raw", exist_ok=True)
