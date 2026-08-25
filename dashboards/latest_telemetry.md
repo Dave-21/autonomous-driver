@@ -1,27 +1,27 @@
-# Escanaba Market Intelligence Report | 2026-08-24
+# Fuel Market Intelligence Report: Escanaba, MI (ZIP 49829)
+**Date:** August 24, 2026 | **Status:** Alert Active
 
 ## Daily Market Summary (Escanaba ZIP 49829)
-**Current Status:** Stable Localized Pricing | **Cluster Size:** 4 Active Stations
-*   **Retail Snapshot:** The local cluster exhibits a tight price spread of **$0.02**, with pricing anchored at **$4.11** (Kwik Trip, Krist) and a slight premium of **$4.13** (Holiday).
-*   **Target Alignment:** Actual prices are performing near the target average of **$4.115**. 
-*   **Local Dynamics:** The "Lincoln Rd" corridor shows high competition; with three stations priced at $4.11, price sensitivity is high and brand loyalty is secondary to proximity.
+*   **Current Average Retail:** $4.115 / gal
+*   **Market Competition:** High density with 4 active stations in the Lincoln Rd cluster.
+*   **Price Variance:** Minimal ($0.02 spread), indicating a highly synchronized local market.
+*   **Primary Clusters:** Strong concentration around N. Lincoln Rd and US-2/41 corridors.
 
 ## Key Macro & Regional Indicators
-*   **Crude Market Sentiment:** WTI sits at **$85.38/bbl**, while Brent holds at **$92.38/bbl**. High crude values are being compounded by refinery supply constraints.
-*   **Supply Constraints (High Risk):** 
-    *   **Refinery Outages:** Significant volume risks identified in the Gulf (Motiva Port Arthur) and structural risks from Russian infrastructure impacts. Expected outages rising to ~9.0 Mbd in October.
-    *   **Regional Hubs:** The Whiting Refinery remains a critical Midwest stabilizer, but its capacity is under pressure from these downstream constraints.
-*   **Regulatory & Logistics Impact:** 
-    *   **Summer Blend Mandate:** **ACTIVE** (Est. Premium: +$0.15).
-    *   **Taxation Floor:** Michigan state/local taxes are estimated at **$0.5068**.
-    *   **Wholesale Gap:** Current RBOB wholesale of **$2.9876** against the retail price suggests a compressed margin, heavily squeezed by summer blends and tax overhead.
+*   **Crude Outlook:** WTI is trading at $85.41; Brent at $92.38. High global prices are being mitigated by regional refinery distribution.
+*   **Refinery Constraints:** Anticipated maintenance schedules are tightening supply, creating upward pressure on local premiums. 
+*   **Regulatory Impact:** Summer Blend Mandates remain **Active**, contributing an estimated $+0.15$ premium to the baseline cost.
+*   **Midwest Hub Integrity:** The Whiting Refinery remains a primary stabilizing force for the Midwest region, despite downstream logistics challenges.
+*   **Logistics & Demand:** A traffic index of 1.15 on US-2/US-41 indicates high transit volume, supporting consistent local demand volumes.
 
 ## Model Performance & Margin Telemetry
-*   **Prediction Accuracy:** 
-    *   **MAE:** $0.2092 | **RMSE:** $0.3623.
-    *   **R² Score:** -0.5 (Warning: Current model features are failing to explain variance in local volatility; retraining recommended).
-*   **Margin Drift Alert:** ⚠️ **CRITICAL ALERT**
+*   **Model Architecture:** `HistGradientBoostingRegressor`
+*   **Accuracy Metrics:**
+    *   **MAE:** $0.3133
+    *   **RMSE:** $0.4431
+*   **Critical Alert:** **R² Score of -1.0** indicates a significant failure in model fit/predictive correlation. Immediate recalibration required.
+*   **Margin Drift Analysis:**
     *   **Current Gross Margin:** $1.1274
-    *   **Historical Average:** $0.5456
-    *   **Delta:** +$0.5817 (Significant Deviation)
-*   **Analyst Note:** The high margin drift and negative R² suggest that the current model is struggling with extreme volatility in refinery availability and federal mandates. Immediate recalibration of weightings for `factor_2` (Outages) and `factor_3` (Summer Blend) is advised to stabilize forecast accuracy.
+    *   **Historical Avg:** $0.5672
+    *   **Variance:** +$0.5602 (**Drift Alert Triggered**)
+*   **Action Item:** The positive drift in margins coupled with the negative R² suggests that current market volatility is outstripping the model's training parameters; manual override or retraining on recent 30-day windows is recommended.
