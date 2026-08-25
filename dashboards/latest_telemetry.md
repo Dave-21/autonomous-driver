@@ -1,29 +1,27 @@
-# Fuel Market Analysis Dashboard: Escanaba, MI (49829)
-**Date:** 2026-08-24 | **Status:** ⚠️ DRIFT ALERT DETECTED
+# Escanaba Market Intelligence Report | 2026-08-24
 
 ## Daily Market Summary (Escanaba ZIP 49829)
-*   **Target Retail Average:** $4.12 / gal
-*   **Local Cluster Performance:** Stable; current cluster average aligns with target.
-*   **Price Spread:** Minimal ($0.02), indicating highly competitive and uniform pricing among local providers (Kwik Trip, Krist, Holiday).
-*   **Traffic Impact:** Higher-than-average traffic index (1.15) suggests sustained demand volumes across the US-2/US-41 corridor.
+**Current Status:** Stable Localized Pricing | **Cluster Size:** 4 Active Stations
+*   **Retail Snapshot:** The local cluster exhibits a tight price spread of **$0.02**, with pricing anchored at **$4.11** (Kwik Trip, Krist) and a slight premium of **$4.13** (Holiday).
+*   **Target Alignment:** Actual prices are performing near the target average of **$4.115**. 
+*   **Local Dynamics:** The "Lincoln Rd" corridor shows high competition; with three stations priced at $4.11, price sensitivity is high and brand loyalty is secondary to proximity.
 
 ## Key Macro & Regional Indicators
-*   **Crude Dynamics:** 
-    *   WTI: $84.94 | Brent: $92.02. Current figures reflect a volatile baseline for regional downstream pricing.
-*   **Supply Constraints:** Significant upward pressure is expected due to maintenance shutdowns at the **Motiva Port Arthur** and **Marathon Galveston Bay** refineries (7% of U.S. capacity).
-*   **Regulatory Loading:** The **Summer Blend Mandate** is currently active, contributing a calculated cost premium of **+$0.15/gal**.
-*   **Regional Logistics:** 
-    *   The **Whiting Refinery** remains the dominant Midwest hub (440k bpd), but supply security is heavily influenced by the **Green Bay Terminal** corridor. 
-    *   Michigan-specific taxes are contributing a baseline of ~$0.51 to final retail pricing.
+*   **Crude Market Sentiment:** WTI sits at **$85.38/bbl**, while Brent holds at **$92.38/bbl**. High crude values are being compounded by refinery supply constraints.
+*   **Supply Constraints (High Risk):** 
+    *   **Refinery Outages:** Significant volume risks identified in the Gulf (Motiva Port Arthur) and structural risks from Russian infrastructure impacts. Expected outages rising to ~9.0 Mbd in October.
+    *   **Regional Hubs:** The Whiting Refinery remains a critical Midwest stabilizer, but its capacity is under pressure from these downstream constraints.
+*   **Regulatory & Logistics Impact:** 
+    *   **Summer Blend Mandate:** **ACTIVE** (Est. Premium: +$0.15).
+    *   **Taxation Floor:** Michigan state/local taxes are estimated at **$0.5068**.
+    *   **Wholesale Gap:** Current RBOB wholesale of **$2.9876** against the retail price suggests a compressed margin, heavily squeezed by summer blends and tax overhead.
 
 ## Model Performance & Margin Telemetry
-*   **Model Architecture:** HistGradientBoostingRegressor
-*   **Accuracy Metrics:**
-    *   MAE: $0.126 | RMSE: $0.2817
-    *   **R² Score: -0.25** (Warning: Model is currently underperforming relative to a simple mean baseline).
-*   **Margin Analytics:**
-    *   **Current Gross Margin:** $1.1566 
-    *   **Historical Average:** $0.5224
-    *   **Margin Drift:** +$0.6342 (Significant variance detected).
-*   **Alert Status:** 🚨 **DRIFT_ALERT_FLAG: TRUE** 
-    *   *Actionable Insight:* The significant margin drift and negative R² score indicate that the current model is failing to capture new volatility in the energy market. Retraining or feature engineering on refinery outage impacts is recommended.
+*   **Prediction Accuracy:** 
+    *   **MAE:** $0.2092 | **RMSE:** $0.3623.
+    *   **R² Score:** -0.5 (Warning: Current model features are failing to explain variance in local volatility; retraining recommended).
+*   **Margin Drift Alert:** ⚠️ **CRITICAL ALERT**
+    *   **Current Gross Margin:** $1.1274
+    *   **Historical Average:** $0.5456
+    *   **Delta:** +$0.5817 (Significant Deviation)
+*   **Analyst Note:** The high margin drift and negative R² suggest that the current model is struggling with extreme volatility in refinery availability and federal mandates. Immediate recalibration of weightings for `factor_2` (Outages) and `factor_3` (Summer Blend) is advised to stabilize forecast accuracy.
