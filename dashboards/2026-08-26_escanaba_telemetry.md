@@ -1,31 +1,46 @@
-# Energy Market Analysis Dashboard: Escanaba, MI (ZIP 49829)
-**Report Date:** 2026-08-26 | **Status:** ⚠️ DRIFT ALERT ACTIVE
+# Fuel Market Analysis Report: Escanaba, MI (49829)
+**Date:** August 26, 2026
+**Status:** ⚠️ **ALERT: High Margin Drift Detected**
+
+---
 
 ## 1. Daily Market Summary (Escanaba ZIP 49829)
-*   **Target Retail Average:** $4.08 / gal
-*   **Local Price Variance:** $0.04 (Tight spread indicating high local competition)
-*   **Active Cluster:** 4 Stations (Kwik Trip, Krist, Holiday)
-*   **Local Dynamics:** 
-    *   The retail cluster is maintaining a consistent price floor of $4.05 at select locations, while the majority of the cluster is hovering at $4.09.
-    *   **Traffic Impact:** The US-2/US-41 traffic index is elevated at **1.15**, suggesting high regional demand and potential logistical pressure on local distribution.
+The local market in Escanaba remains stable but highly competitive, characterized by a narrow pricing spread and high consistency across major retailers.
+
+*   **Current Average Retail:** $4.08 / gal
+*   **Active Stations:** 4
+*   **Price Variance:** $\pm$ $0.04 (Highly localized competition)
+*   **Current Status:** Stable. Retailers (Kwik Trip, Krist, Holiday) are pricing in a tight band, reflecting stable local demand despite broader macro volatility.
+
+---
 
 ## 2. Key Macro & Regional Indicators
-*   **Global Crude Context:** WTI at **$81.64** and Brent at **$86.40** provide a steady but volatile baseline for upstream costs.
-*   **Refining Constraints:** 
-    *   **High Utilization:** US refiners are operating at >95% capacity; high utilization and deferred maintenance are creating a "fragile" supply chain.
-    *   **Regional Risk:** Specific outages in California and potential disruptions from Middle Eastern tensions are tightening the supply of gasoline and distillate.
-*   **Mandates & Taxes:**
-    *   **Summer Blend:** Active ($0.15 premium) is currently factored into retail pricing.
-    *   **Michigan Tax Floor:** $0.5022 (including $0.309 excise tax) represents a significant fixed cost component.
-*   **Midwest Logistics:** The Whiting Refinery remains a critical high-capacity hub, though the "fragile" status of global refining suggests localized bottlenecks may occur.
+The following factors are influencing the current price floor and regional logistics:
+
+*   **Crude & Supply Chain:** 
+    *   **WTI/Brent:** $81.48 / $86.20.
+    *   **Refinery Risk:** High. Significant outages in California (Torrance) and a global "fragile energy crisis" due to 95%+ refinery utilization indicate potential upstream volatility.
+*   **Regulatory & Seasonal:** 
+    *   **Summer Blend:** Active (+$0.15 estimated cost premium).
+    *   **Taxes:** Michigan excise tax of $0.309 ($0.502 total floor) remains a fixed pressure point.
+*   **Midwest Logistics:**
+    *   **Whiting Refinery:** Operating as a stable hub for local inventory.
+    *   **Traffic Index:** 1.15 (Indicates elevated local logistics complexity for the US-2/US-41 corridor).
+
+---
 
 ## 3. Model Performance & Margin Telemetry
-*   **Model Architecture:** `HistGradientBoostingRegressor`
-*   **Core Metrics:**
-    *   **MAE/RMSE:** 0.6193 / 0.6194 (Current error margin is stable)
-    *   **R² Score:** **-2505.63** 🚨 *Critical Alert: The negative R² suggests the model is failing to capture the underlying variance of the current data trend.*
-*   **Margin Analysis:**
-    *   **Current Margin:** $1.1684
-    *   **Historical Average:** $0.6377
-    *   **Margin Drift:** +$0.5307 (**Alert Triggered**)
-*   **Actionable Insight:** The significant margin drift and catastrophic R² score indicate that current market volatility (likely driven by refinery capacity issues and regional supply constraints) is outperforming the current model's predictive capabilities. **Immediate retraining or feature engineering on refinery capacity inputs is recommended.**
+**System Alert:** The model is reporting significant statistical anomalies and margin drift.
+
+| Metric | Value | Status |
+| :--- | :--- | :--- |
+| **MAE (Mean Absolute Error)** | $0.5884 | Moderate |
+| **RMSE** | $0.5886 | Moderate |
+| **R² Score** | -1528.19 | **CRITICAL FAILURE** |
+| **Gross Margin (Latest)** | $1.1719 | **HIGH** |
+| **Margin Drift** | +$0.5175 | **ALERT** |
+
+**MLOps Analysis:**
+*   **Model Degradation:** The extreme negative $R^2$ value indicates that the current `HistGradientBoostingRegressor` model is failing to capture the relationship between inputs and target prices. This may be due to a sudden shift in regional macro factors not currently weighted in the feature set.
+*   **Margin Alert:** The margin has drifted significantly ($0.5175) above the historical average ($0.6544). This suggests that while retail prices are steady, the cost of goods or logistics is moving faster than the model's predictive capability.
+*   **Action Item:** Trigger manual review of the training weights for the "Refinery Outage" and "Summer Blend" features to recalibrate the model against current regional volatility.
