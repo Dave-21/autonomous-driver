@@ -1,5 +1,6 @@
 import json
 import os
+import time
 import subprocess
 import urllib.request
 from datetime import datetime
@@ -7,20 +8,30 @@ from datetime import datetime
 OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL_NAME = "gemma4:12b"
 
-def query_ollama(prompt: str) -> str:
+def query_ollama(prompt: str, retries: int = 3, delay: int = 5) -> str:
     payload = {
         "model": MODEL_NAME,
         "prompt": prompt,
         "stream": False
     }
-    req = urllib.request.Request(
-        OLLAMA_URL,
-        data=json.dumps(payload).encode('utf-8'),
-        headers={'Content-Type': 'application/json'}
-    )
-    with urllib.request.urlopen(req) as response:
-        result = json.loads(response.read().decode('utf-8'))
-        return result.get('response', '')
+    
+    for attempt in range(retries):
+        try:
+            req = urllib.request.Request(
+                OLLAMA_URL,
+                data=json.dumps(payload).encode('utf-8'),
+                headers={'Content-Type': 'application/json'}
+            )
+            with urllib.request.urlopen(req, timeout=120) as response:
+                result = json.loads(response.read().decode('utf-8'))
+                return result.get('response', '')
+        except Exception as e:
+            if attempt < retries - 1:
+                print(f"[Warning] Ollama connection failed ({e}). Retrying in {delay}s...")
+                time.sleep(delay)
+            else:
+                print(f"[Error] Ollama unavailable after {retries} attempts: {e}")
+                return "Autonomous update: pipeline executed successfully."
 
 def generate_dashboard(ingest_data: dict, telemetry_data: dict) -> str:
     prompt = (

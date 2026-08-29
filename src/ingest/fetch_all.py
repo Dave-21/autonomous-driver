@@ -20,11 +20,14 @@ def fetch_9_factor_payload():
     # -------------------------------------------------------------
     print("[1/9 & 5/9] Fetching Commodity Markets (WTI, Brent, Chicago Wholesale RBOB)...")
     tickers = yf.Tickers('CL=F BZ=F RB=F')
-    hist = tickers.history(period='5d')
+    hist = tickers.history(period='7d')
     
-    wti = float(hist['Close']['CL=F'].iloc[-1])
-    brent = float(hist['Close']['BZ=F'].iloc[-1])
-    rbob = float(hist['Close']['RB=F'].iloc[-1])
+    # Drop empty weekend/holiday rows and forward-fill latest valid settlement
+    close_prices = hist['Close'].dropna(how='all').ffill()
+    
+    wti = float(close_prices['CL=F'].dropna().iloc[-1])
+    brent = float(close_prices['BZ=F'].dropna().iloc[-1])
+    rbob = float(close_prices['RB=F'].dropna().iloc[-1])
 
     # -------------------------------------------------------------
     # Factor 2: National Refinery Outages
