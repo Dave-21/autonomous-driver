@@ -1,38 +1,33 @@
-# Escanaba Fuel Market Intelligence Dashboard
-**Date:** 2026-09-01 | **Location:** Escanaba, MI (ZIP 49829)
+# Executive Market Dashboard: Escanaba, MI Fuel Analysis
+**Date:** 2026-09-01 | **Location:** Escanaba (ZIP 49829)
 
-## Daily Market Summary (Escanaba ZIP 49829)
-*   **Current Target Retail Price:** $3.97
-*   **Active Station Count:** 2
-*   **Local Price Spread:** $0.00
-*   **Station Status:**
-    *   **Kwik Trip (501 N Lincoln Rd):** $3.97
-    *   **Krist (102 N Lincoln Rd):** $3.97
-    *   *Note: Data for sites 95805 and 17459 are currently null/unavailable.*
+## 1. Daily Market Summary (Escanaba ZIP 49829)
+*   **Current Retail Target:** $3.97
+*   **Reporting Status:** 50% (2 of 4) stations reporting data.
+*   **Local Price Consistency:** Stable at $3.97 where reported.
+*   **Data Gaps:** "Krist" and "Holiday" stations are currently returning null values; manual verification may be required to determine if these are out-of-market or simply offline.
 
-## Key Macro & Regional Indicators
-*   **Global Crude Benchmark:** 
-    *   WTI: $86.79/bbl
-    *   Brent: $88.90/bbl
-*   **Regional Refineries:** 
-    *   **California:** Significant capacity impact noted in Torrance refinery (supply constraint risk).
-    *   **Midwest:** High refinery outage activity recorded; inventory levels below historical averages.
-    *   **Whiting Refinery:** Operational but carries historical infrastructure complexity.
-*   **Policy & Market:**
-    *   **Summer Blend Mandate:** **ACTIVE** (Estimated Cost Premium: +$0.15).
-    *   **Chicago Spot Market (RBOB):** $3.1215/gal.
-*   **Taxation Layer:**
-    *   Excise Tax: $0.309
-    *   Estimated Tax Floor: $0.5148
+## 2. Key Macro & Regional Indicators
+*   **Global Crude Baseline:** 
+    *   WTI: $86.80 | Brent: $88.90
+*   **Supply & Refinery Dynamics:** 
+    *   **Outage Risk:** High. Reports indicate refineries are stretching capacity to avoid maintenance shutdowns; Motiva's postponement of the Port Arthur unit indicates a strategy to maximize volume.
+    *   **Regulatory Load:** Summer Blend mandates are **ACTIVE**, adding an estimated **$0.15** premium to the base cost.
+*   **Regional Logistics:**
+    *   **Chicago Spot Market:** $3.1219/gal.
+    *   **Midwest Transit:** Traffic index for US-2/US-41 is stable (1.0).
+    *   **Taxation:** Total tax floor sits at **$0.5149** (inclusive of $0.309 excise).
+*   **Strategic Insight:** The combination of active Summer Blend premiums and reported refinery capacity constraints suggests a tightened margin for error in local regional distribution.
 
-## Model Performance & Margin Telemetry
+## 3. Model Performance & Margin Telemetry
 *   **Model Architecture:** `HistGradientBoostingRegressor`
-*   **Accuracy Metrics:**
-    *   **MAE:** $0.3802
-    *   **RMSE:** $0.3824
-    *   **R² Score:** -85.82 (Alert: Significant model instability/low correlation detected).
+*   **Accuracy Metrics:** 
+    *   **MAE:** $0.3742 | **RMSE:** $0.3766
+    *   **R² Score:** -78.38 *(Warning: Negative R² indicates significant variance or model mismatch with current market conditions).*
 *   **Margin Analysis:**
-    *   **Current Gross Margin:** $0.8485
-    *   **Historical Average:** $0.7044
-    *   **Margin Drift:** +$0.1441
-*   **⚠️ DRIFT ALERT:** **ACTIVE**. The current margin exceeds historical averages by 14.4%. Investigation into the underlying R2 variance and drift factor is recommended to recalibrate the prediction engine.
+    *   **Current Gross Margin:** $0.8481
+    *   **Historical Average:** $0.7079
+    *   **Margin Drift:** +$0.1402
+*   **⚠️ ALERT:** **Drift_Alert_Flag is TRUE.** The model is detecting significant deviation from historical norms. The current margin spike and poor R² score suggest heavy influence from volatile refinery outage variables or "Summer Blend" cost-push inflation. 
+
+**Action Item:** Re-calibrate model weights on "Refinery Outage" and "Summer Blend" features to address the high drift and low R² score.
