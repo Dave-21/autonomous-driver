@@ -1,32 +1,31 @@
-# Daily Market Summary (Escanaba ZIP 49829)
+# Market Analysis Report: Escanaba, MI (ZIP 49829)
+**Date:** 2026-09-02 | **Status:** Alert Active
 
-**Retail Price Status:**
-*   **Target Retail Average:** $3.97
-*   **Active Cluster Count:** 3 Stations reporting consistent pricing.
-*   **Current Pricing:**
-    *   **Kwik Trip (501 N Lincoln Rd):** $3.97
-    *   **Krist (102 N Lincoln Rd):** $3.97
-    *   **Holiday (700 N Lincoln Rd):** $3.97
-*   **Market Behavior:** High uniformity across the local cluster; current pricing reflects the localized infrastructure's stability despite broader volatility.
+## 1. Daily Market Summary (Escanaba ZIP 49829)
+*   **Current Retail Price:** $3.97 (Uniform across all active nodes)
+*   **Local Cluster Health:** 100% Price Sync (0.00 USD spread across 4 stations)
+*   **Active Stations:** 4 (Kwik Trip, Krist, Holiday)
+*   **Logistics Hub:** Stable; Green Bay terminals confirmed as viable supply routes for regional distribution.
 
-## Key Macro & Regional Indicators
+## 2. Key Macro & Regional Indicators
+*   **Crude Oil Market:** WTI ($91.15) and Brent ($95.64) indicate a high-cost baseline for upstream procurement.
+*   **Supply Constraints:** 
+    *   **Regional:** Torrance (CA) refinery outages are creating upstream volatility for gasoline/distillate.
+    *   **Local:** Whiting Refinery (Midwest) remains a high-capacity anchor ($440k bpd capacity) providing stability for local Midwest supply.
+*   **Regulatory & Logistics:**
+    *   **Summer Blend:** Active (+ $0.15 premium impact).
+    *   **Taxation:** Michigan tax floor ($0.5139) contributes significantly to the regional price floor.
+*   **Spot Market:** Chicago RBOB Wholesale currently at $3.1053.
 
-*   **Crude Dynamics:** Global crude is trading at **WTI $90.78** and **Brent $95.44**.
-*   **Refinery Pressure:** US refineries are running at **97% capacity**. Global supply constraints (conflict-driven) are tightening the refined product market.
-*   **Regulatory Impact:** The **Summer Blend Mandate** is currently active, adding an estimated **+$0.15** premium to regional costs.
-*   **Regional Infrastructure:**
-    *   **Whiting Refinery:** Stable status as a high-capacity (440k bpd) Midwest hub.
-    *   **Green Bay Terminals:** Serving as a critical supply node for the Midwest.
-*   **Logistics:** Traffic Index at **1.0** indicates standard flow on US-2/US-41.
+## 3. Model Performance & Margin Telemetry
+| Metric | Value | Status |
+| :--- | :--- | :--- |
+| **MAE (Mean Absolute Error)** | $0.2864 | Stable |
+| **RMSE** | $0.2867 | Stable |
+| **R² Score** | -483.633 | **CRITICAL FAILURE** |
+| **Gross Margin (Latest)** | $0.8647 | **ALERT** |
+| **Margin Drift** | +$0.1438 | **ALERT** |
 
-## Model Performance & Margin Telemetry
-
-*   **Accuracy Metrics:**
-    *   **MAE:** 0.3052 | **RMSE:** 0.3062
-    *   **R² Score:** **-146.13** (Critical Failure: The model is currently failing to capture the trend line).
-*   **Margin Analytics:**
-    *   **Latest Gross Margin:** $0.8246
-    *   **Historical Avg:** $0.7176
-    *   **Margin Drift:** +$0.107
-*   **Alert Status:** ⚠️ **DRIFT_ALERT_FLAG: TRUE**
-    *   *Note:* The significant negative R² score and positive margin drift suggest that current macro volatility (refinery capacity/global conflict) is deviating from historical training patterns. Retraining or feature weight recalibration is recommended.
+**MLOps Action Items:**
+*   **Critical Alert:** The $R^2$ score of -483.633 indicates a complete model breakdown; the model is performing significantly worse than a horizontal baseline. Immediate retraining or feature re-weighting is required.
+*   **Drift Detected:** Margin drift of +$0.1438 over the historical average ($0.7209) suggests a decoupling between procurement costs and retail pricing models. Investigation into "Summer Blend" impact vs. local "Whiting" supply stability is recommended.
