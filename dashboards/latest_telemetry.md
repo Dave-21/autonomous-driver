@@ -1,37 +1,35 @@
-# Market Intelligence Report: Escanaba, MI (ZIP 49829)
-**Date:** 2026-09-04 | **Status:** Active Monitoring
+# Daily Market Analysis: Escanaba, MI (ZIP 49829)
+**Date:** 2026-09-04 | **Status:** Active
 
 ## 1. Daily Market Summary (Escanaba ZIP 49829)
-The local retail cluster shows a tiered pricing structure with a notable variance in premium positioning.
-
-*   **Cluster Stats:** 4 Active Stations | **Target Retail Avg:** $4.025
-*   **Price Spread:** $0.22
-*   **Station Breakdown:**
-    *   **Value Tier:** $3.97 (Krist, Holiday) - *Primary volume drivers.*
-    *   **Premium Tier:** $4.19 (Kwik Trip) - *Outlier in local cluster.*
-*   **Traffic Impact:** High demand signaled by a **1.25 Traffic Index** on the US-2/US-41 corridor.
+*   **Target Retail Average:** $4.025
+*   **Current Cluster Range:** $3.97 – $4.19
+*   **Local Price Spread:** $0.22
+*   **Station Distribution:**
+    *   **Premium:** Kwik Trip ($4.19)
+    *   **Competitive:** Krist ($3.97), Holiday ($3.97)
+*   **Analysis:** Current retail prices show a high variance relative to the target. The $4.19 outlier at Kwik Trip indicates a localized premium, while the $3.97 cluster represents the current price floor for the region.
 
 ## 2. Key Macro & Regional Indicators
-Analysis of supply chain, regional logistics, and policy impacts.
-
-*   **Refinery Dynamics:** U.S. refineries are operating at high capacity (**97%**). While current supply is stable, upcoming maintenance schedules and global conflict-related shortages are exerting upward pressure on regional prices.
-*   **Midwest Logistics:** The **Whiting Refinery** remains a critical anchor for the Midwest, currently providing a stable primary source for the region.
-*   **Policy & Tributes:** The **Summer Blend Mandate** is active, adding a calculated **$0.15 premium** to the baseline.
-*   **Local Tax Environment:** Michigan excise taxes ($0.309) and the total tax floor ($0.5199) provide a consistent baseline for local retail calculations.
-*   **Inbound Supply:** The **Green Bay Terminal** continues to serve as a primary distribution hub; its connectivity to regional markets remains a stabilizing factor for local inventory.
+*   **Global Crude Commodities:**
+    *   **WTI:** $91.63/bbl | **Brent:** $96.43/bbl
+*   **Supply Chain & Infrastructure:**
+    *   **Refinery Risk:** Significant supply pressure noted from the Torrance (CA) outage.
+    *   **Midwest Reliability:** The BP Whiting refinery remains a critical hub, though aged infrastructure continues to be a monitored risk factor.
+    *   **Terminal Logistics:** Green Bay terminals remain active; high traffic indices (1.25) suggest high localized demand pressure.
+*   **Regulatory & Market Factors:**
+    *   **Summer Blend:** **ACTIVE** (Estimated Cost Premium: +$0.15)
+    *   **Chicago Spot (RBOB):** $3.2084/gal
+    *   **State Tax Floor:** $0.52 (Includes $0.309 Excise Tax)
 
 ## 3. Model Performance & Margin Telemetry
-MLOps performance audit of the `HistGradientBoostingRegressor` model.
-
-| Metric | Value | Status |
-| :--- | :--- | :--- |
-| **MAE (Mean Absolute Error)** | $0.2793 | Stable |
-| **RMSE** | $0.2798 | Stable |
-| **R² Score** | **-253.0595** | ⚠️ **CRITICAL ALERT** |
-| **Current Gross Margin** | $0.819 | Healthy |
-| **Margin Drift** | +$0.0941 | No Alert |
-
-**MLOps Action Items:**
-*   **Model Degradation:** The negative **R² Score** indicates a significant failure in the model's ability to explain variance (likely due to extreme outliers or a non-linear trend mismatch).
-*   **Recommendation:** Immediate retraining of the `HistGradientBoostingRegressor` is required to address the negative R² before the next production cycle.
-*   **Profitability:** Despite model instability, current margins remain **9.4% above** historical averages ($0.7249).
+*   **Model Architecture:** `HistGradientBoostingRegressor`
+*   **Accuracy Metrics:**
+    *   **MAE:** $0.2742
+    *   **RMSE:** $0.2751
+    *   **R² Score:** -155.35 (⚠️ **Critical Alert:** Negative R² indicates the model is currently performing worse than a horizontal mean; immediate retraining or feature re-weighting required).
+*   **Profitability Metrics:**
+    *   **Current Gross Margin:** $0.8166
+    *   **Historical Avg:** $0.7268
+    *   **Margin Drift:** +$0.0898 (Current margin is outperforming historical averages by ~12.7%).
+    *   **Drift Alert:** Inactive.
