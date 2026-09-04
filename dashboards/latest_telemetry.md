@@ -1,35 +1,30 @@
-# Daily Market Analysis: Escanaba, MI (ZIP 49829)
-**Date:** 2026-09-04 | **Status:** Active
+# Energy Market Intelligence Report: Escanaba, MI (49829)
+**Date:** 2026-09-04 | **Status:** Active Monitoring
 
 ## 1. Daily Market Summary (Escanaba ZIP 49829)
-*   **Target Retail Average:** $4.025
-*   **Current Cluster Range:** $3.97 – $4.19
-*   **Local Price Spread:** $0.22
-*   **Station Distribution:**
-    *   **Premium:** Kwik Trip ($4.19)
-    *   **Competitive:** Krist ($3.97), Holiday ($3.97)
-*   **Analysis:** Current retail prices show a high variance relative to the target. The $4.19 outlier at Kwik Trip indicates a localized premium, while the $3.97 cluster represents the current price floor for the region.
+*   **Target Retail Average:** $4.025/gal
+*   **Current Range:** $3.97 – $4.19
+*   **Local Spread:** $0.22
+*   **Cluster Dynamics:** 4 active stations identified. 
+*   **Price Variance:** Significant premium noted at Kwik Trip ($4.19) compared to the local floor of $3.97 (Krist/Holiday).
+*   **Actionable Insight:** High local variance suggests a "convenience premium" is active. Procurement should prioritize high-volume nodes at the $3.97 mark to mitigate the $0.22 delta.
 
 ## 2. Key Macro & Regional Indicators
-*   **Global Crude Commodities:**
-    *   **WTI:** $91.63/bbl | **Brent:** $96.43/bbl
-*   **Supply Chain & Infrastructure:**
-    *   **Refinery Risk:** Significant supply pressure noted from the Torrance (CA) outage.
-    *   **Midwest Reliability:** The BP Whiting refinery remains a critical hub, though aged infrastructure continues to be a monitored risk factor.
-    *   **Terminal Logistics:** Green Bay terminals remain active; high traffic indices (1.25) suggest high localized demand pressure.
-*   **Regulatory & Market Factors:**
-    *   **Summer Blend:** **ACTIVE** (Estimated Cost Premium: +$0.15)
-    *   **Chicago Spot (RBOB):** $3.2084/gal
-    *   **State Tax Floor:** $0.52 (Includes $0.309 Excise Tax)
+*   **Crude Fundamentals:** WTI ($91.49) and Brent ($96.21) indicate a high-cost environment.
+*   **Refinery Constraints:** 
+    *   **Port Arthur (TX):** Maintenance delays into 2027 are increasing regional capacity pressure.
+    *   **BP Whiting (IN):** Remains a critical "linchpin" for Midwest fuel supply.
+*   **Seasonal Impact:** **Summer Blend Mandate is ACTIVE.** This adds a $\approx$0.15 premium to the base cost.
+*   **Logistics & Infrastructure:** 
+    *   **Traffic Index:** 1.25 (US-2/US-41 corridors) suggests moderate transportation pressure.
+    *   **Supply Hubs:** Green Bay terminals remain active for regional distribution.
 
 ## 3. Model Performance & Margin Telemetry
-*   **Model Architecture:** `HistGradientBoostingRegressor`
 *   **Accuracy Metrics:**
-    *   **MAE:** $0.2742
-    *   **RMSE:** $0.2751
-    *   **R² Score:** -155.35 (⚠️ **Critical Alert:** Negative R² indicates the model is currently performing worse than a horizontal mean; immediate retraining or feature re-weighting required).
-*   **Profitability Metrics:**
-    *   **Current Gross Margin:** $0.8166
-    *   **Historical Avg:** $0.7268
-    *   **Margin Drift:** +$0.0898 (Current margin is outperforming historical averages by ~12.7%).
-    *   **Drift Alert:** Inactive.
+    *   **MAE:** 0.273 | **RMSE:** 0.274
+*   **Critical Alert:** **R² Score (-117.2893)**. 
+    *   *Analysis:* The model is currently experiencing a significant fit failure or data mismatch. An R² score this far below zero indicates the regression is failing to capture the underlying variance of the Escanaba market. **Immediate retraining or feature re-weighting is recommended.**
+*   **Margin Dynamics:**
+    *   **Current Gross Margin:** $0.8165
+    *   **Historical Avg:** $0.7286
+    *   **Margin Drift:** +$0.0879 (Alert: False - No automated flag triggered, but upward trend is noted).
