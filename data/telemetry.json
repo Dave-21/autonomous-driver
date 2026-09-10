@@ -1,16 +1,16 @@
 {
-  "timestamp": "2026-09-10T14:55:02.144179",
-  "total_sample_count": 59,
+  "timestamp": "2026-09-10T17:46:24.756159",
+  "total_sample_count": 60,
   "model_type": "HistGradientBoostingRegressor",
   "metrics": {
-    "mae_usd": 0.1457,
-    "rmse_usd": 0.1765,
-    "r2_score": -2.1832
+    "mae_usd": 0.1664,
+    "rmse_usd": 0.1907,
+    "r2_score": -3.241
   },
   "drift_telemetry": {
-    "latest_gross_margin_usd": 1.0724,
-    "historical_avg_margin_usd": 0.7859,
-    "margin_drift_usd": 0.2865,
+    "latest_gross_margin_usd": 1.0247,
+    "historical_avg_margin_usd": 0.7898,
+    "margin_drift_usd": 0.2349,
     "drift_alert_flag": true
   }
 }

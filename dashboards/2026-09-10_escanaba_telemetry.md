@@ -1,35 +1,29 @@
-# Escanaba, MI Fuel Market Intelligence Report
-**Date:** 2026-09-10 | **Location:** Escanaba, MI (ZIP 49829)
+# Market Analysis Report: Escanaba, MI (ZIP 49829)
+**Date:** 2026-09-10 | **Status:** ⚠️ Alert - Model Drift Detected
 
-## 1. Daily Market Summary (Escanaba ZIP 49829)
-*   **Current Cluster Status:** Active
+## Daily Market Summary (Escanaba ZIP 49829)
 *   **Target Retail Average:** $4.27
-*   **Local Price Spread:** $0.04 (Low volatility)
-*   **Active Stations:** 4
-*   **Retailer Breakdown:**
+*   **Current Cluster Status:** 4 active stations identified.
+*   **Local Price Spread:** $0.04 (Low volatility within the immediate cluster).
+*   **Station Inventory:**
     *   **Kwik Trip:** $4.27
     *   **Holiday:** $4.27
-    *   **Krist (6344 US-2-41):** $4.29 (Premium)
-    *   **Krist (102 N Lincoln Rd):** $4.25 (Discount)
+    *   **Krist (102 N Lincoln):** $4.25 (Price Leader)
+    *   **Krist (6344 US-2-41):** $4.29
 
-## 2. Key Macro & Regional Indicators
-*   **Global Crude Outlook:** Brent ($107.26) and WTI ($101.99) remain elevated, driven by global refinery capacity constraints.
-*   **Refinery Infrastructure:** U.S. refineries are operating at **97% capacity**. While the 2026 maintenance season is approaching, current geopolitical conflicts are tightening the supply of refined products.
-*   **Midwest Stability:** The **Whiting Refinery** remains a critical anchor for the Midwest economy, maintaining high throughput to offset regional volatility.
-*   **Policy & Logistics:**
-    *   **Summer Blend:** Active (Current impact: +$0.15/gal).
-    *   **Chicago Spot Market:** Currently trading at $3.1976/gal.
-    *   **Taxation:** Michigan excise tax of $0.309 applies; total tax floor estimated at $0.5194.
+## Key Macro & Regional Indicators
+*   **Global Crude Dynamics:** High volatility noted with WTI at $103.93/bbl and Brent at $108.95/bbl.
+*   **Regulatory & Seasonal:** Summer Blend Mandate is **Active**, contributing a +$0.15 cost premium.
+*   **Supply Chain Health:** 
+    *   **Regional Stability:** The Whiting Refinery (Lake Michigan) remains a key regional pillar for Midwest supply.
+    *   **National Risk:** Ongoing refinery outages in California (Torrance) are tightening national distillate supply, potentially increasing pressure on downstream markets.
+*   **Logistics & Tax:** Michigan state tax floor is estimated at $0.5223. Chicago spot market currently trading at $3.2453/gal.
 
-## 3. Model Performance & Margin Telemetry
-*   **Model Architecture:** `HistGradientBoostingRegressor`
+## Model Performance & Margin Telemetry
 *   **Accuracy Metrics:**
-    *   **MAE:** $0.1457
-    *   **RMSE:** $0.1765
-*   **Critical Alert Status:** 
-    *   **R² Score:** **-2.1832** (⚠️ *Critical Warning: Negative R² indicates the model is performing significantly worse than a horizontal baseline. Immediate retraining or feature engineering required.*)
-    *   **Margin Drift:** **+0.2865** (🚨 *Alert Triggered: Current gross margin of $1.0724 deviates significantly from the historical average of $0.7859.*)
-
-**Action Items:**
-1.  **MLOps:** Investigate the negative R² score; investigate feature weights for `summer_blend_mandate` and `wholesale_price`.
-2.  **Procurement:** Monitor margin drift to determine if the $0.28 increase is due to localized supply spikes or model error.
+    *   **MAE:** $0.1664 | **RMSE:** $0.1907
+*   **Critical Alerts:**
+    *   **Margin Drift:** **$0.2349** (Exceeds historical threshold).
+    *   **Drift Alert Flag:** **TRUE**.
+    *   **R² Score:** **-3.241** (Model is currently underperforming compared to a simple mean baseline).
+*   **MLOps Recommendation:** The negative R² score and high margin drift indicate that the current `HistGradientBoostingRegressor` is struggling to adapt to recent macro fluctuations (likely due to the high crude prices/summer blend overlap). **Immediate retraining or hyperparameter tuning is recommended.**
