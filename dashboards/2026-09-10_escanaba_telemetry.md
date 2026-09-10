@@ -1,39 +1,35 @@
-# Executive Market Dashboard: Escanaba, MI (Zip 49829)
-**Date:** 2026-09-10 | **Status:** ⚠️ DRIFT ALERT
+# Escanaba, MI Fuel Market Intelligence Report
+**Date:** 2026-09-10 | **Location:** Escanaba, MI (ZIP 49829)
 
 ## 1. Daily Market Summary (Escanaba ZIP 49829)
-The Escanaba cluster currently shows high price stability with a minimal spread, aligning closely with the target retail average.
-
-*   **Current Cluster Status:** 4 active stations | **Target Avg:** $4.275
-*   **Retail Price Inventory:**
+*   **Current Cluster Status:** Active
+*   **Target Retail Average:** $4.27
+*   **Local Price Spread:** $0.04 (Low volatility)
+*   **Active Stations:** 4
+*   **Retailer Breakdown:**
     *   **Kwik Trip:** $4.27
-    *   **Krist (US-2-41):** $4.29
-    *   **Krist (Lincoln Rd):** $4.27
     *   **Holiday:** $4.27
-*   **Local Spread:** $0.02 (Low variance)
+    *   **Krist (6344 US-2-41):** $4.29 (Premium)
+    *   **Krist (102 N Lincoln Rd):** $4.25 (Discount)
 
 ## 2. Key Macro & Regional Indicators
-*   **Crude Market:** WTI is trading at **$101.70/bbl**; Brent at **$106.99/bbl**.
-*   **Refinery Logistics:** 
-    *   **Capacity Squeeze:** U.S. refineries are operating at **97% capacity**. Global supply constraints and upcoming maintenance cycles are creating a tightening refined products market.
-    *   **Regional Stability:** The **Whiting Refinery** remains a critical infrastructure anchor for the Midwest.
-*   **Regulatory & Seasonal:**
-    *   **Summer Blend:** Active (adds approx. **$0.15** to base cost).
-    *   **Taxation:** State/Local floor sits at **$0.5181** (including $0.309 excise).
-*   **Regional Feed:** Green Bay terminal operations remain active, stabilizing downstream supply.
+*   **Global Crude Outlook:** Brent ($107.26) and WTI ($101.99) remain elevated, driven by global refinery capacity constraints.
+*   **Refinery Infrastructure:** U.S. refineries are operating at **97% capacity**. While the 2026 maintenance season is approaching, current geopolitical conflicts are tightening the supply of refined products.
+*   **Midwest Stability:** The **Whiting Refinery** remains a critical anchor for the Midwest economy, maintaining high throughput to offset regional volatility.
+*   **Policy & Logistics:**
+    *   **Summer Blend:** Active (Current impact: +$0.15/gal).
+    *   **Chicago Spot Market:** Currently trading at $3.1976/gal.
+    *   **Taxation:** Michigan excise tax of $0.309 applies; total tax floor estimated at $0.5194.
 
 ## 3. Model Performance & Margin Telemetry
-**Model Type:** `HistGradientBoostingRegressor`
+*   **Model Architecture:** `HistGradientBoostingRegressor`
+*   **Accuracy Metrics:**
+    *   **MAE:** $0.1457
+    *   **RMSE:** $0.1765
+*   **Critical Alert Status:** 
+    *   **R² Score:** **-2.1832** (⚠️ *Critical Warning: Negative R² indicates the model is performing significantly worse than a horizontal baseline. Immediate retraining or feature engineering required.*)
+    *   **Margin Drift:** **+0.2865** (🚨 *Alert Triggered: Current gross margin of $1.0724 deviates significantly from the historical average of $0.7859.*)
 
-| Metric | Value | Status |
-| :--- | :--- | :--- |
-| **MAE (Mean Absolute Error)** | $0.1245 | ✅ Stable |
-| **RMSE** | $0.1602 | ✅ Acceptable |
-| **R² Score** | **-1.5243** | ❌ **CRITICAL** |
-| **Gross Margin (Current)** | $1.0992 | ⚠️ Elevated |
-| **Margin Drift** | **$0.3183** | ⚠️ **ALERT** |
-
-**MLOps Action Items:**
-1.  **Model Retraining Required:** The negative $R^2$ score indicates the model is performing significantly worse than a baseline mean, likely due to sudden volatility in the "Refinery Outage" and "Summer Blend" features.
-2.  **Drift Investigation:** A $0.3183$ margin drift (significantly above the $0.7809$ historical average) suggests a decoupling between current macro inputs and retail price outcomes.
-3.  **Feature Re-weighting:** Recommend auditing the weight of `factor_2_national_refinery_outages` to better capture the current supply squeeze.
+**Action Items:**
+1.  **MLOps:** Investigate the negative R² score; investigate feature weights for `summer_blend_mandate` and `wholesale_price`.
+2.  **Procurement:** Monitor margin drift to determine if the $0.28 increase is due to localized supply spikes or model error.
