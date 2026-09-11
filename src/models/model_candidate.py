@@ -1,10 +1,10 @@
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import mean_absolute_error
 
-# Model Architecture: Cost Pass-Through Margin Regressor with RandomForest
-MODEL_TYPE = "PassThrough_RandomForest"
+# Model Architecture: Cost Pass-Through Margin Regressor with GradientBoosting
+MODEL_TYPE = "PassThrough_GradientBoosting"
 
 def train_and_forecast(df_train: pd.DataFrame, df_test: pd.DataFrame, tomorrow_features: dict) -> dict:
     feature_cols = [
@@ -17,9 +17,10 @@ def train_and_forecast(df_train: pd.DataFrame, df_test: pd.DataFrame, tomorrow_f
     # Calculate target net margin: Retail - Wholesale - Taxes
     train_margin = df_train["target_escanaba_retail_price"] - df_train["rbob_wholesale_usd_gal"] - df_train["tax_floor_usd"]
 
-    model = RandomForestRegressor(
+    model = GradientBoostingRegressor(
         n_estimators=100,
-        max_depth=10,
+        learning_rate=0.1,
+        max_depth=5,
         min_samples_split=2,
         random_state=42
     )
