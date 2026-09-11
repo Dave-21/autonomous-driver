@@ -1,23 +1,23 @@
 # Escanaba Retail Fuel Intelligence Dashboard
-**Generated:** 2026-09-11 18:57:51 | **Data Timestamp:** 2026-09-11T14:34:50.777092
+**Generated:** 2026-09-11 19:20:20 | **Data Timestamp:** 2026-09-11T14:34:50.777092
 
 ---
 
-## ⏳ Driver Recommendation: WAIT TO FILL
+## Driver Recommendation: WAIT TO FILL
 **Current Lincoln Rd Average:** $4.315/gal  
-**Projected 24h Retail Price:** $3.772/gal (**-0.543/gal**)
+**Projected 24h Retail Price:** $4.115/gal (**-0.200/gal**)
 
 ### Market Analysis
-Downstream wholesale costs in Green Bay/Chicago have eased while station margins expanded. Lincoln Road pump prices are projected to drop by -$0.54/gal over the next 1-2 days. Hold off on filling up until tomorrow to capture lower prices.
+Downstream wholesale costs in Green Bay/Chicago have eased while station margins expanded. Lincoln Road pump prices are projected to drop by -$0.20/gal over the next 1-2 days. Hold off on filling up until tomorrow to capture lower prices.
 
 ---
 
 ## Model Benchmark Telemetry
-- **Active Champion Architecture:** `GradientBoostingRegressor`
-- **Walk-Forward Backtest MAE:** `$0.1880/gal`
-- **Asymmetric Spike Loss (Penalty for Missed Surges):** `$0.3536/gal`
-- **Directional Trend Accuracy:** `74.36%`
-- **Driver Decision Success Rate:** `69.23%`
+- **Active Champion Architecture:** `HuberRegressor`
+- **Walk-Forward Backtest MAE:** `$0.1496/gal`
+- **Asymmetric Spike Loss (Penalty for Missed Surges):** `$0.2936/gal`
+- **Directional Trend Accuracy:** `94.87%`
+- **Driver Decision Success Rate:** `79.49%`
 
 ---
-*Autonomous MLOps commit verified by AST Guardrail & LangGraph Committee.*
+*Autonomous MLOps commit verified by AST Guardrail & LangGraph Council.*
