@@ -1,37 +1,30 @@
-# Executive Market Analysis: Escanaba, MI (ZIP 49829)
-**Report Date:** 2026-09-11 | **Status:** ⚠️ Alert - Margin Drift Detected
+# Daily Market Analysis: Escanaba Fuel Sector
+**Date:** 2026-09-11 | **Location:** Escanaba, MI (ZIP 49829)
 
-## 1. Daily Market Summary (Escanaba ZIP 49829)
-The local market shows moderate volatility with a variance of **$0.24** between the cheapest and most expensive stations.
+## Daily Market Summary (Escanaba ZIP 49829)
+*   **Cluster Status:** 4 Active Stations | **Target Retail Avg:** $4.315
+*   **Current Price Spectrum:** $4.25 – $4.49
+*   **Local Spread:** $0.24
+*   **Market Dynamics:** The local cluster is showing high variance at the "Kwik Trip" location ($4.49), while "Krist" and "Holiday" locations are maintaining a tighter, lower pricing floor. The local average currently aligns precisely with the target retail price.
 
-*   **Target Retail Average:** $4.315
-*   **Current Cluster Range:** $4.25 — $4.49
-*   **Active Stations:** 4
-*   **Key Outliers:** 
-    *   *Kwik Trip* is currently trading at a premium ($4.49).
-    *   *Krist* locations are currently the floor price ($4.25).
-*   **Demand Indicator:** High traffic index (1.25) on US-2/US-41 suggests strong local demand, supporting current price floors.
+## Key Macro & Regional Indicators
+*   **Global Crude Sentiment:**
+    *   **WTI:** $100.32/bbl | **Brent:** $104.93/bbl
+    *   **Pressure Point:** High refinery utilization (97%) and geopolitical constraints are tightening the supply of refined products.
+*   **Midwest Infrastructure:**
+    *   **Whiting Refinery:** Confirmed as a primary Midwest hub; high capacity is currently absorbing regional demand.
+    *   **Green Bay Logistics:** Supply remains stable via the Sunoco LP network, despite historical pipeline vulnerabilities.
+*   **Regulatory/Cost Overlays:**
+    *   **Summer Blend Mandate:** Active (+ $0.15/gal cost impact).
+    *   **Taxation:** Michigan state floor is currently $0.5156.
+*   **Traffic Impact:** The US-2/US-41 corridor is seeing a high traffic index (1.25), suggesting higher local demand for the Escanaba cluster.
 
-## 2. Key Macro & Regional Indicators
-*   **Crude Market:** High volatility environment with **WTI at $99.66** and **Brent at $105.04**.
-*   **Supply Constraints:** 
-    *   **Refinery Risk:** Torrance, CA outage impacts national gasoline/distillate supply chains.
-    *   **Midwest Stability:** Whiting Refinery remains a primary hub for Midwest fuel stability.
-*   **Regulatory Impact:** Summer Blend Mandate is **Active**, adding a **$0.15** estimated cost premium.
-*   **Regional Logistics:** Green Bay terminals show robust capacity (approx. 2.4M bbls gasoline), providing a localized buffer against coastal supply shocks.
-*   **Taxation:** Michigan state tax floor is currently set at **$0.5173**.
-
-## 3. Model Performance & Margin Telemetry
-**⚠️ CRITICAL ALERT: Model Degradation Detected**
-
-*   **Accuracy Metrics:**
-    *   **MAE:** $0.1763
-    *   **RMSE:** $0.2005
-    *   **R² Score:** **-3.4354** (Critical Failure: The negative R² indicates the model is currently unable to explain the variance in price data, likely due to extreme market volatility or feature drift).
-*   **Margin Analysis:**
-    *   **Current Gross Margin:** $1.1519
-    *   **Historical Average:** $0.7958
-    *   **Margin Drift:** **+0.3561**
-*   **Action Items:** 
-    1.  **Immediate Retraining:** The negative R² score necessitates an immediate review of the *HistGradientBoostingRegressor* hyperparameters.
-    2.  **Drift Investigation:** Investigate the cause of the $0.35 margin drift; current profitability is significantly deviating from historical norms.
+## Model Performance & Margin Telemetry
+*   **Accuracy Metrics:** 
+    *   **MAE:** $0.205 | **RMSE:** $0.2222
+*   **Model Integrity Warning:** 
+    *   **R² Score:** -5.71 (Significant divergence; model is currently struggling to capture non-linear correlations in the current volatility).
+*   **Margin Alert:** 
+    *   **Status:** ⚠️ **DRIFT_ALERT_FLAG: TRUE**
+    *   **Current Margin:** $1.1804 | **Historical Avg:** $0.8020
+    *   **Insight:** A +47% deviation in gross margins suggests a significant shift in localized procurement costs or retail pricing strategies that is not currently modeled in the baseline.
