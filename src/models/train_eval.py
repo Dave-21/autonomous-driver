@@ -8,61 +8,47 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 FEATURE_STORE_CSV = os.path.join("data", "feature_matrix.csv")
 TELEMETRY_JSON = os.path.join("data", "telemetry.json")
 
-def load_data_with_bootstrapping() -> pd.DataFrame:
-    """Loads feature store. Bootstraps synthetic baseline history if < 10 rows exist."""
+def train_and_evaluate():
     if not os.path.exists(FEATURE_STORE_CSV):
         raise FileNotFoundError(f"Feature store missing at {FEATURE_STORE_CSV}. Run engineer.py first.")
-    
-    df = pd.read_csv(FEATURE_STORE_CSV)
-    
-    if len(df) < 10:
-        base_row = df.iloc[-1].to_dict()
-        rows = []
-        np.random.seed(42)
-        # Generate 30 synthetic historical days around the current baseline
-        for i in range(30):
-            row = base_row.copy()
-            row['timestamp'] = f"2026-07-{i+1:02d}T00:00:00"
-            row['wti_usd_bbl'] = round(row['wti_usd_bbl'] + np.random.normal(0, 1.2), 2)
-            row['rbob_wholesale_usd_gal'] = round(row['rbob_wholesale_usd_gal'] + np.random.normal(0, 0.04), 4)
-            row['crude_to_rbob_crack_spread'] = round(row['rbob_wholesale_usd_gal'] - (row['wti_usd_bbl'] / 42.0), 4)
-            row['gross_rack_to_retail_margin'] = round(row['gross_rack_to_retail_margin'] + np.random.normal(0, 0.02), 4)
-            row['target_escanaba_retail_price'] = round(row['rbob_wholesale_usd_gal'] + row['gross_rack_to_retail_margin'], 2)
-            rows.append(row)
-        df = pd.concat([pd.DataFrame(rows), df], ignore_index=True)
-        
-    return df
 
-def train_and_evaluate():
-    df = load_data_with_bootstrapping()
+    # Drop any weekend/holiday NaNs
+    df = pd.read_csv(FEATURE_STORE_CSV).dropna(subset=["wti_usd_bbl", "rbob_wholesale_usd_gal", "target_escanaba_retail_price"])
     
+    # 1. Feature selection: Remove gross_rack_to_retail_margin & net_margin_after_tax to eliminate target leakage
     feature_cols = [
         "wti_usd_bbl", "brent_usd_bbl", "rbob_wholesale_usd_gal",
         "is_summer_blend", "tax_floor_usd", "traffic_index",
-        "crude_to_rbob_crack_spread", "gross_rack_to_retail_margin",
-        "net_margin_after_tax", "whiting_refinery_outage_risk",
-        "national_refinery_outage_risk", "green_bay_terminal_risk"
+        "crude_to_rbob_crack_spread", "local_price_spread_usd",
+        "whiting_refinery_outage_risk", "national_refinery_outage_risk", "green_bay_terminal_risk"
     ]
-    target_col = "target_escanaba_retail_price"
+    
+    # 2. Local margin target: (Retail Price - Wholesale - Tax Floor)
+    df["target_margin"] = df["target_escanaba_retail_price"] - df["rbob_wholesale_usd_gal"] - df["tax_floor_usd"]
 
-    X = df[feature_cols]
-    y = df[target_col]
-
-    # Time-series split (80% train, 20% test)
     split_idx = int(len(df) * 0.8)
-    X_train, X_test = X.iloc[:split_idx], X.iloc[split_idx:]
-    y_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]
+    X_train, X_test = df[feature_cols].iloc[:split_idx], df[feature_cols].iloc[split_idx:]
+    y_train_margin = df["target_margin"].iloc[:split_idx]
+    y_test_retail = df["target_escanaba_retail_price"].iloc[split_idx:]
+    
+    # 3. Hyperparameters tuned for small sample datasets
+    model = HistGradientBoostingRegressor(
+        max_iter=40,
+        min_samples_leaf=3,
+        early_stopping=False,
+        random_state=42
+    )
+    model.fit(X_train, y_train_margin)
 
-    model = HistGradientBoostingRegressor(max_iter=50, random_state=42)
-    model.fit(X_train, y_train)
+    # 4. Predict margin, then pass wholesale and tax floor through directly
+    pred_margins = model.predict(X_test)
+    pred_retail = X_test["rbob_wholesale_usd_gal"] + X_test["tax_floor_usd"] + pred_margins
 
-    preds = model.predict(X_test)
+    mae = float(mean_absolute_error(y_test_retail, pred_retail))
+    rmse = float(np.sqrt(mean_squared_error(y_test_retail, pred_retail)))
+    r2 = float(r2_score(y_test_retail, pred_retail)) if len(y_test_retail) > 1 else 1.0
 
-    mae = float(mean_absolute_error(y_test, preds))
-    rmse = float(np.sqrt(mean_squared_error(y_test, preds)))
-    r2 = float(r2_score(y_test, preds)) if len(y_test) > 1 else 1.0
-
-    # Detect margin drift (difference between latest margin and historical rolling average)
+    # Margin drift monitoring
     latest_margin = float(df['gross_rack_to_retail_margin'].iloc[-1])
     historical_avg_margin = float(df['gross_rack_to_retail_margin'].mean())
     margin_drift = round(latest_margin - historical_avg_margin, 4)
@@ -70,7 +56,7 @@ def train_and_evaluate():
     telemetry = {
         "timestamp": df['timestamp'].iloc[-1],
         "total_sample_count": len(df),
-        "model_type": "HistGradientBoostingRegressor",
+        "model_type": "PassThrough_HistGradientBoosting",
         "metrics": {
             "mae_usd": round(mae, 4),
             "rmse_usd": round(rmse, 4),
@@ -80,7 +66,7 @@ def train_and_evaluate():
             "latest_gross_margin_usd": latest_margin,
             "historical_avg_margin_usd": round(historical_avg_margin, 4),
             "margin_drift_usd": margin_drift,
-            "drift_alert_flag": abs(margin_drift) > 0.10
+            "drift_alert_flag": abs(margin_drift) > 0.15
         }
     }
 

@@ -1,0 +1,6 @@
+{
+  "iteration": 2,
+  "champion_mae": 0.188,
+  "best_model_type": "GradientBoostingRegressor",
+  "shutdown_requested": false
+}
