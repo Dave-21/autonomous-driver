@@ -4,22 +4,39 @@
   "backtest_type": "WalkForward_TimeSeriesSplit_4Folds",
   "model_type": "GradientBoostingRegressor",
   "hyperparameters": {
-    "n_estimators": 35,
-    "max_depth": 2,
+    "alpha": 0.9,
+    "ccp_alpha": 0.0,
+    "criterion": "deprecated",
+    "init": null,
     "learning_rate": 0.04,
-    "subsample": 0.85
+    "loss": "squared_error",
+    "max_depth": 2,
+    "max_features": null,
+    "max_leaf_nodes": null,
+    "min_impurity_decrease": 0.0,
+    "min_samples_leaf": 1,
+    "min_samples_split": 2,
+    "min_weight_fraction_leaf": 0.0,
+    "n_estimators": 35,
+    "n_iter_no_change": null,
+    "random_state": null,
+    "subsample": 0.85,
+    "tol": 0.0001,
+    "validation_fraction": 0.1,
+    "verbose": 0,
+    "warm_start": false
   },
   "metrics": {
-    "mae_usd": 0.2289,
-    "asymmetric_mae_usd": 0.4323,
-    "directional_accuracy_pct": 76.92,
-    "decision_success_pct": 69.23
+    "mae_usd": 0.2241,
+    "asymmetric_mae_usd": 0.427,
+    "directional_accuracy_pct": 82.05,
+    "decision_success_pct": 74.36
   },
   "forecast_tomorrow": {
     "current_retail_avg": 4.315,
-    "predicted_tomorrow_retail": 3.729,
-    "expected_delta_usd": -0.586,
+    "predicted_tomorrow_retail": 3.755,
+    "expected_delta_usd": -0.56,
     "recommendation": "WAIT TO FILL",
-    "reasoning": "Pump prices expected to ease by -$0.59/gal over the next 24-48 hours."
+    "reasoning": "Pump prices expected to ease by -$0.56/gal over the next 24-48 hours."
   }
 }
