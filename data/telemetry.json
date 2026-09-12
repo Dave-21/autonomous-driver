@@ -11,6 +11,7 @@
     "mae_usd": 0.1496,
     "asymmetric_mae_usd": 0.2936,
     "directional_accuracy_pct": 94.87,
+    "turning_point_acc_pct": 100.0,
     "decision_success_pct": 79.49
   },
   "forecast_tomorrow": {

@@ -1,5 +1,5 @@
 # Escanaba Retail Fuel Intelligence Dashboard
-**Generated:** 2026-09-11 19:20:20 | **Data Timestamp:** 2026-09-11T14:34:50.777092
+**Generated:** 2026-09-12 11:32:26 | **Data Timestamp:** 2026-09-11T14:34:50.777092
 
 ---
 
@@ -15,8 +15,9 @@ Downstream wholesale costs in Green Bay/Chicago have eased while station margins
 ## Model Benchmark Telemetry
 - **Active Champion Architecture:** `HuberRegressor`
 - **Walk-Forward Backtest MAE:** `$0.1496/gal`
-- **Asymmetric Spike Loss (Penalty for Missed Surges):** `$0.2936/gal`
+- **Asymmetric Spike Loss:** `$0.2936/gal`
 - **Directional Trend Accuracy:** `94.87%`
+- **Turning Point (Inflection) Accuracy:** `100.0%`
 - **Driver Decision Success Rate:** `79.49%`
 
 ---
