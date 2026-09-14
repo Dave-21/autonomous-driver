@@ -8,7 +8,8 @@ def extract_features(df: pd.DataFrame) -> pd.DataFrame:
     d = df.copy()
     # Feature engineering here using available columns (EXCEPT target_escanaba_retail_price):
     d['rack_spread_ema'] = (d['rbob_wholesale_usd_gal'] - d['wti_usd_bbl']/42.0).ewm(span=3).mean()
-    d['crack_spread_volatility_ratio'] = d['crude_to_rbob_crack_spread'].rolling(window=7).std() / d['crude_to_rbob_crack_spread'].rolling(window=7).mean()
+    d['crack_spread_volatility_ratio'] = d['crude_to_rbob_crack_spread'].rolling(window=30).std() / d['crude_to_rbob_crack_spread'].rolling(window=30).mean()
+    d['tax_floor_ema'] = (d['target_escanaba_retail_price'] - d['tax_floor_usd']).ewm(span=3).mean()
     numeric_cols = [c for c in d.columns if c not in ['timestamp', 'target_escanaba_retail_price'] and pd.api.types.is_numeric_dtype(d[c])]
     return d[numeric_cols].bfill().fillna(0.0)
 
