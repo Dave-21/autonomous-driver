@@ -27,7 +27,7 @@ def train_and_forecast(df_train: pd.DataFrame, df_test: pd.DataFrame, tomorrow_f
     X_test = extract_features(df_test)[X_train.columns]
 
     # Select architecture and hyperparameters:
-    model = ElasticNetCV(l1_ratio=0.5, cv=5)
+    model = ElasticNetCV(l1_ratio=0.7, cv=10)
     model.fit(X_train, y_train)
     pred_margins = model.predict(X_test)
     pred_test = df_test['rbob_wholesale_usd_gal'].values + df_test['tax_floor_usd'].values + pred_margins
@@ -41,5 +41,5 @@ def train_and_forecast(df_train: pd.DataFrame, df_test: pd.DataFrame, tomorrow_f
         'model_type': 'ElasticNetCV',
         'test_predictions': pred_test.tolist(),
         'predicted_tomorrow_retail': round(pred_tomorrow, 3),
-        'hyperparameters': {'l1_ratio': 0.5, 'cv': 5}
+        'hyperparameters': {'l1_ratio': 0.7, 'cv': 10}
     }
