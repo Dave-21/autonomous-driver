@@ -8,17 +8,17 @@
     "epsilon": 1.25
   },
   "metrics": {
-    "mae_usd": 0.1424,
-    "asymmetric_mae_usd": 0.2623,
-    "directional_accuracy_pct": 87.18,
+    "mae_usd": 0.1361,
+    "asymmetric_mae_usd": 0.2597,
+    "directional_accuracy_pct": 89.74,
     "turning_point_acc_pct": 100.0,
-    "decision_success_pct": 84.62
+    "decision_success_pct": 79.49
   },
   "forecast_tomorrow": {
     "current_retail_avg": 4.315,
-    "predicted_tomorrow_retail": 4.171,
-    "expected_delta_usd": -0.144,
+    "predicted_tomorrow_retail": 4.187,
+    "expected_delta_usd": -0.128,
     "recommendation": "WAIT TO FILL",
-    "reasoning": "Pump prices expected to ease by -$0.14/gal over the next 24-48 hours."
+    "reasoning": "Pump prices expected to ease by -$0.13/gal over the next 24-48 hours."
   }
 }

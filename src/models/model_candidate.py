@@ -12,6 +12,8 @@ def extract_features(df: pd.DataFrame) -> pd.DataFrame:
     d['tax_floor_ema'] = (d['target_escanaba_retail_price'] - d['tax_floor_usd']).ewm(span=3).mean()
     d['wholesale_acceleration'] = (d['rbob_wholesale_usd_gal'].diff(1) - d['rbob_wholesale_usd_gal'].diff(2)).fillna(0.0)
     d['crack_spread_momentum'] = d['crude_to_rbob_crack_spread'].diff().div(d['crude_to_rbob_crack_spread']).fillna(0.0)
+    d['crack_spread_momentum_ratio'] = d['crude_to_rbob_crack_spread'].diff().div(d['crude_to_rbob_crack_spread'].shift(1)).fillna(0.0)
+    d['wholesale_acceleration_lag'] = d['wholesale_acceleration'].shift(1).fillna(0.0)
     numeric_cols = [c for c in d.columns if c not in ['timestamp', 'target_escanaba_retail_price'] and pd.api.types.is_numeric_dtype(d[c])]
     return d[numeric_cols].replace([np.inf, -np.inf], np.nan).bfill().ffill().fillna(0.0)
 
