@@ -15,8 +15,8 @@ def extract_features(df: pd.DataFrame) -> pd.DataFrame:
     d['wholesale_acceleration_lag'] = d['wholesale_acceleration'].shift(1).fillna(0.0)
     
     # New features
-    d['log_return_wholesale_acceleration'] = np.log(d['wholesale_acceleration'] + 1).diff().fillna(0.0)
-    d['momentum_ratio_crack_spread'] = d['crack_spread_momentum'].div(d['crack_spread_momentum'].shift(1)).fillna(0.0)
+    d['rack_spread_log'] = np.log(d['rack_spread_ema'] + 1)
+    d['crack_spread_momentum_ratio_squared'] = (d['crack_spread_momentum_ratio']).pow(2)
     
     numeric_cols = [c for c in d.columns if c not in ['timestamp', 'target_escanaba_retail_price'] and pd.api.types.is_numeric_dtype(d[c])]
     return d[numeric_cols].replace([np.inf, -np.inf], np.nan).bfill().ffill().fillna(0.0)
