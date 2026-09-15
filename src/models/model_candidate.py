@@ -5,7 +5,8 @@ from sklearn.preprocessing import StandardScaler
 
 def extract_features(df: pd.DataFrame) -> pd.DataFrame:
     d = df.copy()
-    # Feature engineering here using available columns (EXCEPT target_escanaba_retail_price):
+    
+    # Feature engineering
     d['rack_spread_ema'] = (d['rbob_wholesale_usd_gal'] - d['wti_usd_bbl']/42.0).ewm(span=3).mean()
     d['crack_spread_volatility_ratio'] = d['crude_to_rbob_crack_spread'].rolling(window=30).std() / d['crude_to_rbob_crack_spread'].rolling(window=30).mean()
     d['tax_floor_ema'] = (d['target_escanaba_retail_price'] - d['tax_floor_usd']).ewm(span=3).mean()
@@ -17,6 +18,10 @@ def extract_features(df: pd.DataFrame) -> pd.DataFrame:
     # New features
     d['rack_spread_log'] = np.log(d['rack_spread_ema'] + 1)
     d['crack_spread_momentum_ratio_squared'] = (d['crack_spread_momentum_ratio']).pow(2)
+    
+    # Proposed features
+    d['rbob_wholesale_price_lagged_momentum_ratio'] = (d['rbob_wholesale_usd_gal'] - d['rbob_wholesale_usd_gal'].shift(1)).div(d['rbob_wholesale_usd_gal'].shift(1)).fillna(0.0)
+    d['crude_to_rbob_crack_spread_lagged_volatility_ratio'] = d['crude_to_rbob_crack_spread'].diff().rolling(window=30).std() / d['crude_to_rbob_crack_spread'].diff().rolling(window=30).mean()
     
     numeric_cols = [c for c in d.columns if c not in ['timestamp', 'target_escanaba_retail_price'] and pd.api.types.is_numeric_dtype(d[c])]
     return d[numeric_cols].replace([np.inf, -np.inf], np.nan).bfill().ffill().fillna(0.0)
