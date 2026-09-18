@@ -1,5 +1,5 @@
 # Escanaba Retail Fuel Intelligence Dashboard
-**Generated:** 2026-09-18 00:43:59 | **Data Timestamp:** 2026-09-11T14:34:50.777092
+**Generated:** 2026-09-18 01:17:05 | **Data Timestamp:** 2026-09-11T14:34:50.777092
 
 ---
 
