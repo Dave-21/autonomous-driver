@@ -5,20 +5,20 @@
   "model_type": "ElasticNetCV",
   "hyperparameters": {
     "l1_ratio": 0.7,
-    "cv": 10
+    "cv": 5
   },
   "metrics": {
-    "mae_usd": 0.1041,
-    "asymmetric_mae_usd": 0.2065,
+    "mae_usd": 0.1017,
+    "asymmetric_mae_usd": 0.2021,
     "directional_accuracy_pct": 94.87,
     "turning_point_acc_pct": 100.0,
     "decision_success_pct": 92.31
   },
   "forecast_tomorrow": {
     "current_retail_avg": 4.77,
-    "predicted_tomorrow_retail": 4.715,
-    "expected_delta_usd": -0.055,
+    "predicted_tomorrow_retail": 4.726,
+    "expected_delta_usd": -0.044,
     "recommendation": "FILL UP TODAY",
-    "reasoning": "Imminent upward price pressure of +$-0.05/gal detected from wholesale rack momentum."
+    "reasoning": "Imminent upward price pressure of +$-0.04/gal detected from wholesale rack momentum."
   }
 }

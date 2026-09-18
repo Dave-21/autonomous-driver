@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import ElasticNetCV
 from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import TimeSeriesSplit
 
 def extract_features(df: pd.DataFrame) -> pd.DataFrame:
     d = df.copy()
@@ -32,7 +33,7 @@ def train_and_forecast(df_train: pd.DataFrame, df_test: pd.DataFrame, tomorrow_f
     X_test = extract_features(df_test)[X_train.columns]
 
     # Select architecture and hyperparameters:
-    model = ElasticNetCV(l1_ratio=0.7, cv=10)
+    model = ElasticNetCV(l1_ratio=[0.01, 0.05, 0.1, 0.2, 0.5, 0.8, 0.95], cv=TimeSeriesSplit(n_splits=5))
     model.fit(X_train, y_train)
     pred_margins = model.predict(X_test)
     pred_test = df_test['rbob_wholesale_usd_gal'].values + df_test['tax_floor_usd'].values + pred_margins
@@ -46,5 +47,5 @@ def train_and_forecast(df_train: pd.DataFrame, df_test: pd.DataFrame, tomorrow_f
         'model_type': 'ElasticNetCV',
         'test_predictions': pred_test.tolist(),
         'predicted_tomorrow_retail': round(pred_tomorrow, 3),
-        'hyperparameters': {'l1_ratio': 0.7, 'cv': 10}
+        'hyperparameters': {'l1_ratio': 0.7, 'cv': 5}
     }
