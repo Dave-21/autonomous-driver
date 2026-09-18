@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-11T14:34:50.777092",
-  "total_valid_samples": 52,
+  "timestamp": "2026-09-18T01:53:31.670238",
+  "total_valid_samples": 53,
   "backtest_type": "WalkForward_TimeSeriesSplit_4Folds",
   "model_type": "ElasticNetCV",
   "hyperparameters": {
@@ -8,17 +8,17 @@
     "cv": 10
   },
   "metrics": {
-    "mae_usd": 0.0877,
-    "asymmetric_mae_usd": 0.1722,
+    "mae_usd": 0.1041,
+    "asymmetric_mae_usd": 0.2065,
     "directional_accuracy_pct": 94.87,
     "turning_point_acc_pct": 100.0,
     "decision_success_pct": 92.31
   },
   "forecast_tomorrow": {
-    "current_retail_avg": 4.315,
-    "predicted_tomorrow_retail": 4.194,
-    "expected_delta_usd": -0.121,
-    "recommendation": "WAIT TO FILL",
-    "reasoning": "Pump prices expected to ease by -$0.12/gal over the next 24-48 hours."
+    "current_retail_avg": 4.77,
+    "predicted_tomorrow_retail": 4.715,
+    "expected_delta_usd": -0.055,
+    "recommendation": "FILL UP TODAY",
+    "reasoning": "Imminent upward price pressure of +$-0.05/gal detected from wholesale rack momentum."
   }
 }
