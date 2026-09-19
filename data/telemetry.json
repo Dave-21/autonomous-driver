@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-18T01:53:31.670238",
-  "total_valid_samples": 53,
+  "timestamp": "2026-09-19T11:46:18.016128",
+  "total_valid_samples": 54,
   "backtest_type": "WalkForward_TimeSeriesSplit_4Folds",
   "model_type": "ElasticNetCV",
   "hyperparameters": {
@@ -8,17 +8,17 @@
     "cv": 5
   },
   "metrics": {
-    "mae_usd": 0.1017,
-    "asymmetric_mae_usd": 0.2021,
-    "directional_accuracy_pct": 94.87,
-    "turning_point_acc_pct": 100.0,
-    "decision_success_pct": 92.31
+    "mae_usd": 0.1234,
+    "asymmetric_mae_usd": 0.2456,
+    "directional_accuracy_pct": 89.74,
+    "turning_point_acc_pct": 50.0,
+    "decision_success_pct": 87.18
   },
   "forecast_tomorrow": {
     "current_retail_avg": 4.77,
-    "predicted_tomorrow_retail": 4.726,
-    "expected_delta_usd": -0.044,
+    "predicted_tomorrow_retail": 4.888,
+    "expected_delta_usd": 0.118,
     "recommendation": "FILL UP TODAY",
-    "reasoning": "Imminent upward price pressure of +$-0.04/gal detected from wholesale rack momentum."
+    "reasoning": "Imminent upward price pressure of +$0.12/gal detected from wholesale rack momentum."
   }
 }
