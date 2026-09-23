@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-21T22:03:54.141458",
-  "total_valid_samples": 56,
+  "timestamp": "2026-09-22T22:56:59.172388",
+  "total_valid_samples": 57,
   "backtest_type": "WalkForward_TimeSeriesSplit_4Folds",
   "model_type": "ElasticNetCV",
   "hyperparameters": {
@@ -8,17 +8,17 @@
     "cv": 5
   },
   "metrics": {
-    "mae_usd": 0.1001,
-    "asymmetric_mae_usd": 0.1996,
-    "directional_accuracy_pct": 95.35,
-    "turning_point_acc_pct": 100.0,
-    "decision_success_pct": 93.02
+    "mae_usd": 0.1176,
+    "asymmetric_mae_usd": 0.2344,
+    "directional_accuracy_pct": 90.7,
+    "turning_point_acc_pct": 50.0,
+    "decision_success_pct": 88.37
   },
   "forecast_tomorrow": {
     "current_retail_avg": 4.77,
-    "predicted_tomorrow_retail": 4.522,
-    "expected_delta_usd": -0.248,
+    "predicted_tomorrow_retail": 4.625,
+    "expected_delta_usd": -0.145,
     "recommendation": "WAIT TO FILL",
-    "reasoning": "Pump prices expected to ease by -$0.25/gal over the next 24-48 hours."
+    "reasoning": "Pump prices expected to ease by -$0.14/gal over the next 24-48 hours."
   }
 }
