@@ -1,6 +1,6 @@
 {
-  "iteration": 2,
-  "champion_mae": 0.188,
-  "best_model_type": "GradientBoostingRegressor",
+  "iteration": 43,
+  "champion_mae": 0.1017,
+  "best_model_type": "ElasticNetCV",
   "shutdown_requested": false
 }

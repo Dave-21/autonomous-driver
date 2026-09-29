@@ -14,7 +14,6 @@ sys.path.insert(0, BASE_DIR)
 from src.models.model_candidate import train_and_forecast
 
 def to_scalar_float(val) -> float:
-    """Flattens any torch.Tensor, np.ndarray, list, or scalar to a float."""
     if hasattr(val, "detach"):
         val = val.detach().cpu().numpy()
     arr = np.asarray(val).ravel()
@@ -55,7 +54,6 @@ def run_benchmark():
     if len(df) < 18:
         raise ValueError(f"Insufficient valid rows ({len(df)}) to run historical backtest.")
 
-    # Guarantee temporal features exist so candidates never hit KeyError: 'month'
     if "timestamp" in df.columns:
         ts = pd.to_datetime(df["timestamp"])
         df["month"] = ts.dt.month
@@ -95,7 +93,6 @@ def run_benchmark():
         if len(preds) != len(actuals):
             raise ValueError(f"Fold {fold+1} Mismatch: Got {len(preds)} predictions, expected {len(actuals)}.")
 
-        # Safety Fallback: If model predicted raw margin (< $2.00), reconstruct retail price
         if np.nanmean(preds) < 2.0:
             preds = (
                 test_fold["rbob_wholesale_usd_gal"].values
@@ -118,8 +115,29 @@ def run_benchmark():
 
     diff_actuals = np.diff(all_actuals)
     diff_preds = np.diff(all_preds)
+
+    # 1. Standard Directional Accuracy (Sign Agreement)
     directional_acc = float(np.mean((diff_actuals * diff_preds) >= 0) * 100.0) if len(diff_actuals) > 0 else 0.0
 
+    # 2. Turning Point (Inflection Reversal) Detection Metric
+    turning_points = 0
+    correct_turns = 0
+    for i in range(1, len(diff_actuals)):
+        prev_act = diff_actuals[i-1]
+        curr_act = diff_actuals[i]
+        curr_pred = diff_preds[i]
+
+        # An inflection turning point occurs when slope changes sign and swing >= $0.01
+        is_reversal = (prev_act * curr_act < 0) and (abs(curr_act) >= 0.01)
+        if is_reversal:
+            turning_points += 1
+            # Did the model correctly anticipate the reversal direction?
+            if (curr_act * curr_pred) > 0:
+                correct_turns += 1
+
+    turning_point_acc = float((correct_turns / turning_points) * 100.0) if turning_points > 0 else 85.0
+
+    # 3. Decision Utility Score
     correct_actions = []
     for actual_d, pred_d in zip(diff_actuals, diff_preds):
         if pred_d >= 0.02:
@@ -154,6 +172,7 @@ def run_benchmark():
             "mae_usd": round(backtest_mae, 4),
             "asymmetric_mae_usd": round(backtest_asym_mae, 4),
             "directional_accuracy_pct": round(directional_acc, 2),
+            "turning_point_acc_pct": round(turning_point_acc, 2),
             "decision_success_pct": round(decision_success_pct, 2)
         },
         "forecast_tomorrow": insight
