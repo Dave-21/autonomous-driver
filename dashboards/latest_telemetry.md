@@ -1,30 +1,32 @@
-# Daily Market Analysis: Escanaba, MI (ZIP 49829)
-**Date:** 2026-10-09
+# Executive Market Report: Escanaba, MI (ZIP 49829)
+**Date:** 2026-10-11 | **Status:** ⚠️ **Margin Drift Alert Active**
 
-## Daily Market Summary (Escanaba ZIP 49829)
-*   **Target Retail Average:** $4.35
-*   **Current Cluster Performance:**
-    *   **Low:** $4.33 (Krist)
-    *   **High:** $4.39 (Kwik Trip)
-    *   **Price Spread:** $0.06 (Highly competitive local environment)
-*   **Station Count:** 4 active stations in the Lincoln Rd cluster.
-*   **Actionable Insight:** Price consistency is high across the cluster; however, the Kwik Trip location is currently positioned at a $0.06 premium above the neighborhood average.
+## 1. Daily Market Summary (Escanaba ZIP 49829)
+*   **Target Retail Average:** $4.323
+*   **Current Local Cluster Price:** $4.33 (avg. at active stations)
+*   **Local Price Spread:** $0.02
+*   **Active Stations Analyzed:** 3 (Kwik Trip, Krist, Holiday)
+*   **Price Stability:** High. Current retail prices are closely aligned with the predicted target average, despite volatility in upstream crude markets.
 
-## Key Macro & Regional Indicators
-*   **Global Crude Context:** WTI is trading at $91.66/bbl; Brent at $104.43/bbl.
-*   **Refinery Supply Chain:** 
-    *   **High Risk:** Maintenance in PADD 2 (Great Lakes region) is active. This seasonally reduces supply and may exert upward pressure on Midwest regional prices.
-    *   **Mitigant:** Summer blend mandate is currently **inactive**, removing the $0.00 premium normally seen in warmer months.
-*   **Local Logistics:** 
-    *   **Whiting Refinery:** Stable capacity (435k bpd) remains a critical anchor for the region.
-    *   **Chicago Spot Market:** RBOB is holding at $3.1361/gal.
-*   **Taxation Layer:** Michigan excise and state taxes are contributing a ~0.5157 floor to the retail price.
+## 2. Key Macro & Regional Indicators
+*   **Crude Oil Indices:** 
+    *   **WTI:** $91.85/bbl | **Brent:** $104.72/bbl
+*   **Refinery Infrastructure:** Significant activity noted regarding refinery outages in the Western US (California). While geographically distant, these impacts contribute to national gasoline and distillate volatility.
+*   **Regional Pipeline/Spot:**
+    *   **Chicago Spot (RBOB):** $3.1534/gal
+    *   **Michigan Tax Floor:** $0.5167 (Incl. $0.309 excise)
+*   **Demand/Logistics:** Traffic Index at **1.25** suggests steady movement, though high enough to warrant monitoring of local transit efficiency.
 
-## Model Performance & Margin Telemetry
+## 3. Model Performance & Margin Telemetry
+*   **Model Architecture:** PassThrough_HistGradientBoosting
 *   **Accuracy Metrics:**
-    *   **MAE:** 0.4237
-    *   **RMSE:** 0.4625
-*   **Model Health Alert:** 
-    *   **R² Score:** -8.0101 (Critical Failure)
-    *   **Margin Drift:** $0.3708 (ALERT: TRUE)
-*   **MLOps Note:** The negative R² score and significant margin drift indicate the model is currently struggling to correlate macro factors with local pricing accurately. A manual review of the `PassThrough_HistGradientBoosting` weights is recommended to account for the PADD 2 refinery maintenance impact.
+    *   **MAE:** 0.2702
+    *   **RMSE:** 0.3897
+    *   **R² Score:** -4.7842 (Indicates high variance/model instability in current market conditions)
+*   **Margin Analysis:**
+    *   **Current Gross Margin:** $1.1696
+    *   **Historical Average:** $0.8479
+    *   **Margin Drift:** +$0.3217 📈
+*   **Alert Status:** **CRITICAL DRIFT DETECTED.** The significant deviation from historical margins and the negative R² score suggest a regime shift in the local market or upstream supply shocks. 
+
+**Actionable Insight:** Investigate the 37% increase in gross margins over the historical baseline to determine if this is driven by local competition scarcity or a spike in regional distribution costs.
