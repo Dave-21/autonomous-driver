@@ -1,32 +1,30 @@
-# Executive Market Report: Escanaba, MI (ZIP 49829)
-**Date:** 2026-10-11 | **Status:** ⚠️ **Margin Drift Alert Active**
+# Executive Market Dashboard: Escanaba, MI (ZIP 49829)
+**Date:** 2026-10-13 | **Status:** ⚠️ **Alert - Margin Drift Detected**
 
 ## 1. Daily Market Summary (Escanaba ZIP 49829)
-*   **Target Retail Average:** $4.323
-*   **Current Local Cluster Price:** $4.33 (avg. at active stations)
-*   **Local Price Spread:** $0.02
-*   **Active Stations Analyzed:** 3 (Kwik Trip, Krist, Holiday)
-*   **Price Stability:** High. Current retail prices are closely aligned with the predicted target average, despite volatility in upstream crude markets.
+*   **Current Cluster Average:** $4.34
+*   **Local Price Spread:** $0.10
+*   **Active Retailer Count:** 4
+*   **Station Breakdown:**
+    *   **Kwik Trip / Holiday:** $4.39 (Market High)
+    *   **Krist (Multiple Locations):** $4.29 (Market Low)
+*   **Analysis:** The local market shows a tight, stable spread. Retailers are currently pricing within a 10-cent window, suggesting high competition and synchronized pricing in the Delta County cluster.
 
 ## 2. Key Macro & Regional Indicators
-*   **Crude Oil Indices:** 
-    *   **WTI:** $91.85/bbl | **Brent:** $104.72/bbl
-*   **Refinery Infrastructure:** Significant activity noted regarding refinery outages in the Western US (California). While geographically distant, these impacts contribute to national gasoline and distillate volatility.
-*   **Regional Pipeline/Spot:**
-    *   **Chicago Spot (RBOB):** $3.1534/gal
-    *   **Michigan Tax Floor:** $0.5167 (Incl. $0.309 excise)
-*   **Demand/Logistics:** Traffic Index at **1.25** suggests steady movement, though high enough to warrant monitoring of local transit efficiency.
+*   **Refinery Supply Risk (High):** Significant headwinds identified in PADD 2 (Great Lakes region). Planned maintenance and deferred maintenance reductions (144,000 bpd) are expected to tighten regional supply.
+*   **Crude Market Context:** Brent is trading at a significant premium over WTI ($105.61 vs $94.15), indicating global supply constraints and high demand.
+*   **Regional Logistics:** Chicago Spot Market is currently at $3.1275/gal. With Michigan's tax floor at ~$0.5152, the remaining margin for transport and retail overhead is compressed.
+*   **Regulatory Note:** Summer Blend Mandate is currently **Inactive**, removing a seasonal cost premium from the calculation.
 
 ## 3. Model Performance & Margin Telemetry
-*   **Model Architecture:** PassThrough_HistGradientBoosting
-*   **Accuracy Metrics:**
-    *   **MAE:** 0.2702
-    *   **RMSE:** 0.3897
-    *   **R² Score:** -4.7842 (Indicates high variance/model instability in current market conditions)
-*   **Margin Analysis:**
-    *   **Current Gross Margin:** $1.1696
-    *   **Historical Average:** $0.8479
-    *   **Margin Drift:** +$0.3217 📈
-*   **Alert Status:** **CRITICAL DRIFT DETECTED.** The significant deviation from historical margins and the negative R² score suggest a regime shift in the local market or upstream supply shocks. 
-
-**Actionable Insight:** Investigate the 37% increase in gross margins over the historical baseline to determine if this is driven by local competition scarcity or a spike in regional distribution costs.
+*   **Current Margin:** $1.2125
+*   **Historical Average:** $0.8533
+*   **Margin Drift:** +$0.3592 (**ALERT TRIGGERED**)
+*   **Model Metrics:**
+    *   **MAE:** $0.2211
+    *   **RMSE:** 0.318
+    *   **R² Score:** -2.8553 ⚠️
+*   **MLOps Action Items:**
+    1.  **Model Degradation:** The negative R² score indicates the `PassThrough_HistGradientBoosting` model is currently performing worse than a simple mean baseline.
+    2.  **Drift Investigation:** The significant margin drift (+42% over historical average) suggests a decouple between wholesale inputs and retail premiums. 
+    3.  **Recommendation:** Immediate retraining or feature re-weighting is required, specifically focusing on the PADD 2 refinery outage impact on local regional premiums.
