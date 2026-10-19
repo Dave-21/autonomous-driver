@@ -1,37 +1,33 @@
-# Escanaba Fuel Market Analysis Dashboard
-**Date:** 2026-10-17 | **Region:** Delta County, MI | **Zip:** 49829
+# Fuel Market Analysis: Escanaba, MI (Zip 49829)
+**Report Date:** 2026-10-18
 
-## 1. Daily Market Summary (Escanaba ZIP 49829)
-The local retail market shows a variance of **$0.23** across the primary cluster. Pricing remains elevated above the wholesale baseline, influenced by regional logistics and refinery constraints.
+## Daily Market Summary (Escanaba ZIP 49829)
+*   **Current Retail Price:** $4.26
+*   **Active Station Count:** 2 (Kwik Trip, Holiday)
+*   **Market Coverage:** 50% of local cluster reporting.
+*   **Price Stability:** Consistent pricing observed between reporting stations in the Delta County cluster.
+*   **Logistics Note:** Local price spread is currently flat ($0.00) among reporting entities.
 
-| Station Name | Address | Price (USD) | Status |
-| :--- | :--- | :--- | :--- |
-| **Kwik Trip** | 501 N Lincoln Rd | $4.49 | Premium |
-| **Krist** | 6344 US-2-41 MI-35 | $4.26 | Base |
-| **Krist** | 102 N Lincoln Rd | $4.29 | Base |
-| **Holiday** | 700 N Lincoln Rd | $4.28 | Base |
+## Key Macro & Regional Indicators
+*   **Crude Oil Index:** 
+    *   WTI: $97.72/bbl 
+    *   Brent: $108.09/bbl
+*   **Refining & Supply:**
+    *   **Midwest Outlook:** High alert on inventory levels. Midwest accounts for 22% of US refining capacity; current reports indicate lower-than-average regional inventories.
+    *   **California Impact:** Torrance refinery outage (3rd largest in SoCal) is impacting regional distribution.
+    *   **Whiting Refinery:** Operational status remains stable as a primary Midwest hub.
+*   **Seasonality:** Summer Blend mandate is **Inactive** (Cost Premium: $0.00).
+*   **Regional Hubs:** Chicago Spot Market currently sits at $3.0976/gal; Green Bay terminals show high activity for regional distribution.
 
-*   **Target Retail Average:** $4.33
-*   **Traffic Impact Factor (US-2/US-41):** 1.25 (High)
-
-## 2. Key Macro & Regional Indicators
-*   **Global Crude Context:** 
-    *   WTI: $101.41/bbl | Brent: $109.86/bbl
-*   **Refinery & Supply Chain:**
-    *   **Utilization:** 93.5% (High demand on existing capacity).
-    *   **PADD 2 Constraints:** Active maintenance period in the Great Lakes region; high reliance on the Whiting Refinery hub.
-    *   **Seasonality:** Summer blend mandate is **Inactive**, removing the seasonal cost premium.
-*   **Logistics:** High regional demand indicated by the US-2/US-41 traffic index, likely contributing to the local price spread.
-
-## 3. Model Performance & Margin Telemetry
-**⚠️ ALERT: Drift Detected**
-
-| Metric | Value | Status |
-| :--- | :--- | :--- |
-| **MAE (Mean Absolute Error)** | $0.1863 | Stable |
-| **RMSE** | $0.202 | Stable |
-| **R² Score** | -1.0261 | **Critical (Model Instability)** |
-| **Gross Margin (Current)** | $1.0946 | High |
-| **Margin Drift** | +$0.227 | **Alert Triggered** |
-
-**Analyst Note:** The negative R² score combined with a positive margin drift suggests a significant divergence between the predictive model and real-time market data. This is likely driven by the non-linear impact of the PADD 2 refinery maintenance and the high traffic multiplier on the US-2/US-41 corridor. Immediate recalibration of the `PassThrough_HistGradientBoosting` weights is recommended.
+## Model Performance & Margin Telemetry
+*   **Model Architecture:** `PassThrough_HistGradientBoosting`
+*   **Accuracy Metrics:**
+    *   **MAE:** $0.1778
+    *   **RMSE:** $0.2048
+*   **Critical Alerts:**
+    *   **R² Score:** -1.6394 (Warning: Model predictive power is currently failing; inspection required).
+    *   **Margin Drift:** **ALERT**
+        *   *Current Gross Margin:* $1.1624
+        *   *Historical Average:* $0.8717
+        *   *Variance:* +$0.2907
+*   **Action Item:** Investigation required into the "drift_alert_flag" status; the significant jump in gross margin suggests either a localized pricing anomaly or a decoupling from historical wholesale correlations.
