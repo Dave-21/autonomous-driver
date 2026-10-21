@@ -1,37 +1,33 @@
-# Fuel Market Analysis Report: Escanaba, MI (ZIP 49829)
-**Date:** 2026-10-20 | **Status:** Active Monitoring
+# Daily Market Analysis: Escanaba, MI (ZIP 49829)
+**Date:** 2026-10-21 | **Status:** ⚠️ Margin Drift Alert
 
-## Daily Market Summary (Escanaba ZIP 49829)
-*   **Retail Average:** $4.218
-*   **Local Price Spread:** $0.05
-*   **Active Cluster Count:** 4 Stations
-*   **Price Distribution:**
-    *   **Kwik Trip:** $4.19 (Local Low)
-    *   **Krist (x2):** $4.22
-    *   **Holiday:** $4.24 (Local High)
-*   **Market Snapshot:** Stable local competition with tight margins; current pricing reflects a steady cluster average despite high upstream crude costs.
+## 1. Daily Market Summary (Escanaba ZIP 49829)
+The local cluster shows high price homogeneity with a very tight spread of **$0.01** across active stations. 
 
-## Key Macro & Regional Indicators
-*   **Crude Indices:** 
-    *   WTI: $99.12/bbl | Brent: $110.35/bbl (Elevated global pricing).
-*   **Refinery Outlook:** 
-    *   **Supply Pressure:** Mixed signal. While many refiners are deferring maintenance to 2027 (potentially easing short-term supply), the "Fall Maintenance" peak (Sept–Nov) is creating immediate operational constraints.
-*   **Midwest Dynamics:**
-    *   Chicago Spot Market: $3.0847/gal.
-    *   **Whiting Refinery:** Stable operation at 435k bpd capacity.
-*   **Regulatory/Taxation:**
-    *   Michigan Excise Tax: $0.309
-    *   Total Tax Floor: $0.5126
-*   **Seasonal Impact:** Summer Blend Mandate is **Inactive** (0.00 premium).
+*   **Target Retail Average:** $4.195/gal
+*   **Active Station Count:** 4
+*   **Primary Retailers:** Kwik Trip, Krist, Holiday
+*   **Price Stability:** High. Local competition is currently uniform, suggesting a stable regional floor.
 
-## Model Performance & Margin Telemetry
-*   **Model Accuracy:**
-    *   **MAE:** $0.052 (Low error)
-    *   **RMSE:** $0.0734
-    *   **R² Score:** 0.4839 (Moderate predictive variance).
-*   **Margin Analysis:**
-    *   **Current Gross Margin:** $1.1333
-    *   **Historical Average:** $0.8786
-    *   **Margin Drift:** +$0.2547
-*   **⚠️ ALERT:** **Drift Alert Flag: TRUE.** 
-    *   *Analysis:* Significant margin expansion detected relative to historical norms. This suggests an unexpected disconnect between wholesale costs and retail realized margins, potentially caused by local supply constraints or specific regional pricing shifts in the Escanaba cluster.
+## 2. Key Macro & Regional Indicators
+*   **Global Crude Trends:** 
+    *   **WTI:** $97.71/bbl
+    *   **Brent:** $109.73/bbl
+*   **Refinery Infrastructure:** The **Whiting Refinery** remains a critical high-capacity asset (435k bpd) for the Great Lakes region. 
+*   **Seasonal Factors:** Summer blend mandates are **Inactive**. The lack of a summer blend premium ($0.00) provides a tailwind for regional margins.
+*   **Logistics Hubs:** Connectivity to the **Green Bay Terminals** remains stable, providing robust supply lines for Michigan and Wisconsin distribution.
+
+## 3. Model Performance & Margin Telemetry
+The model is currently flagging a significant deviation in operational margins.
+
+| Metric | Value | Status |
+| :--- | :--- | :--- |
+| **MAE (Mean Absolute Error)** | $0.0787 | Stable |
+| **RMSE (Root Mean Square Error)** | $0.0948 | Stable |
+| **R² Score** | 0.1742 | **Low** (High Volatility) |
+
+**Critical Alert: Margin Drift Detected**
+*   **Current Gross Margin:** $1.1446
+*   **Historical Average:** $0.8822
+*   **Margin Drift:** +$0.2624
+*   **Action Required:** The `drift_alert_flag` is **TRUE**. The jump in gross margin suggests a decoupling from historical norms—investigate whether this is due to sudden local supply constraints or an unexpected drop in procurement costs relative to retail prices.
